@@ -15,8 +15,6 @@ int WINAPI WinMain(_In_ HINSTANCE hInstance, _In_opt_  HINSTANCE hPrevInstance, 
 	if (!SysInit()){
 		return 0;
 	}
-	int a = 0;
-	++a = 5;
 	while (!ProcessMessage() && !CheckHitKey(KEY_INPUT_ESCAPE))
 	{
 
