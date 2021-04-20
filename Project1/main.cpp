@@ -1,4 +1,5 @@
 #include <DxLib.h>
+#include "class/Shape.h"
 
 bool SysInit()
 {
@@ -15,9 +16,15 @@ int WINAPI WinMain(_In_ HINSTANCE hInstance, _In_opt_  HINSTANCE hPrevInstance, 
 	if (!SysInit()){
 		return 0;
 	}
+	Shape shape;
+
 	while (!ProcessMessage() && !CheckHitKey(KEY_INPUT_ESCAPE))
 	{
+		ClearDrawScreen();
 
+		shape.Draw();
+		
+		ScreenFlip();
 	}
 	return 1;
 }
