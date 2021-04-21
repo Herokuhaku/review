@@ -1,5 +1,6 @@
 #include <DxLib.h>
 #include "class/Shape.h"
+#include "class/Square.h"
 
 bool SysInit()
 {
@@ -16,15 +17,23 @@ int WINAPI WinMain(_In_ HINSTANCE hInstance, _In_opt_  HINSTANCE hPrevInstance, 
 	if (!SysInit()){
 		return 0;
 	}
-	Shape shape;
+	// Square‚ÌDraw‚ð•`‰æ‚·‚é
+	Square *shape1 = new Square(Vector2(0, 0), Vector2(50, 50));
+	// Shape‚ÌDraw‚ð•`‰æ‚·‚é
+	Shape * shape2 = new Shape(Vector2(100,100),Vector2(50, 50));
+	Square* shape3 = new Square(Vector2(200,200), Vector2(50, 50));
 
 	while (!ProcessMessage() && !CheckHitKey(KEY_INPUT_ESCAPE))
 	{
 		ClearDrawScreen();
 
-		shape.Draw();
+		(*shape1).Draw();
+		(*shape2).Draw();
+
+		(*shape3).Shape::Draw();
 		
 		ScreenFlip();
 	}
+	delete shape1;
 	return 1;
 }
