@@ -18,17 +18,18 @@ int WINAPI WinMain(_In_ HINSTANCE hInstance, _In_opt_  HINSTANCE hPrevInstance, 
 		return 0;
 	}
 	// Square‚ÌDraw‚ð•`‰æ‚·‚é
-	Square *shape1 = new Square(Vector2(0, 0), Vector2(50, 50));
+	Square *shape1 = new Square(Vector2(400, 400), Vector2(50, 50));
 
 	while (!ProcessMessage() && !CheckHitKey(KEY_INPUT_ESCAPE))
 	{
 		ClearDrawScreen();
 		//(*shape1).Draw(Vector2(400,400));
 		(*shape1).Draw();
-		(*shape1).Draw(Vector2(50,50));
+		(*shape1).Draw(Vector2(50,50),3);
 		DrawLine(0-1,400-1,800-1,400-1,0xff0000);
 		DrawLine(400-1,0-1, 400-1, 800-1, 0xff0000);
-		
+
+
 		ScreenFlip();
 	}
 
