@@ -17,8 +17,11 @@ void Square::Draw(Vector2 offset,float num)
 	Vector2 size = (size_ * num);
 	DrawCircle(pos_.x + offset.x,pos_.y + offset.y,5,0xff,true);
 
-	DrawBox(pos_.x + offset.x - off.x-size.x/2, pos_.y + offset.y - off.y - size.y/2,
-		pos_.x + (size.x/2) + offset.x + off.x, pos_.y + (size.y/2) + offset.y + off.y, 0xff00ff, false);
+	DrawBox(pos_.x -size.x/2 + offset.x, pos_.y - size.y/2 + offset.y,
+		pos_.x + (size.x/2) + offset.x, pos_.y +(size.y/2) + offset.y, 0xff00ff, false);
+
+	//DrawBox(pos_.x + offset.x - off.x/*-size.x/2*/, pos_.y + offset.y - off.y/* - size.y/2*/,
+	//	pos_.x + /*(size.x/2) */+ offset.x + off.x, pos_.y +/* (size.y/2)*/ + offset.y + off.y, 0xff00ff, false);
 
 	//DrawBox(pos_.x - offset.x, pos_.y - offset.y, pos_.x + offset.x, pos_.y + offset.y, 0xffffff, true);
 }

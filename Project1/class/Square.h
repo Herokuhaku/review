@@ -10,5 +10,5 @@ public:
 	void Draw(void)override;
 	// n”{‚ÌDraw
 	void Draw(float num);
-	void Draw(Vector2 center,float num);
+	void Draw(Vector2 center,float num = 1);
 };

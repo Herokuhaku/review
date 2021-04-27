@@ -12,6 +12,13 @@ Vector2::Vector2(int x_, int y_)
 	y = y_;
 }
 
+Vector2 Vector2::operator=(Vector2 tmp)
+{
+	x = tmp.x;
+	y = tmp.y;
+	return Vector2(x,y);
+}
+
 Vector2 Vector2::operator*(float tmp)
 {
 	return Vector2(x*tmp,y*tmp);
