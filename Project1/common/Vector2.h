@@ -6,12 +6,22 @@ public:
 	Vector2(int x_,int y_);
 	int x;
 	int y;
-	Vector2 operator = (Vector2 tmp);
-	Vector2 operator * (float tmp);
-	Vector2 operator / (float tmp);
-	Vector2 operator * (Vector2 tmp);
-	Vector2 operator / (Vector2 tmp);
+	Vector2& operator = (const Vector2 tmp);
+	Vector2& operator += (const Vector2 tmp);
+	Vector2& operator -= (const Vector2 tmp);
+	Vector2& operator *= (const Vector2 tmp);
+	Vector2& operator /= (const Vector2 tmp);
+
 	Vector2 operator +(Vector2 tmp);
 	Vector2 operator -(Vector2 tmp);
-};
+	Vector2 operator * (Vector2 tmp);
+	Vector2 operator / (Vector2 tmp);
 
+	Vector2 operator * (float tmp);
+	Vector2 operator / (float tmp);
+
+	Vector2 operator +()const;
+	Vector2 operator -()const;
+
+	Vector2 operator +(int num);
+};
