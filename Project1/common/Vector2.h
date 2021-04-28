@@ -41,7 +41,8 @@ public:
 	Vector2 operator +()const;
 	Vector2 operator -()const;
 
-	//Vector2& operator++();
+	Vector2& operator++();
+	Vector2 operator++(int);
 };
 
 // Vector2 ‚Æ int‚ÌŽl‘¥‰‰ŽZ

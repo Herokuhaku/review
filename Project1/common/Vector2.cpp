@@ -86,6 +86,11 @@ bool Vector2::operator&&(const Vector2& vec) const
 	return ((x && vec.x) && (y && vec.y));
 }
 
+bool Vector2::operator||(const Vector2& vec) const
+{
+	return ((x || vec.x) || (y || vec.y));
+}
+
 int& Vector2::operator[](const int& num)
 {
 	if (!num)
@@ -126,7 +131,10 @@ Vector2 Vector2::operator/(const Vector2& vec)const
 
 Vector2 Vector2::operator%(const Vector2& vec) const
 {
-	return Vector2(x % vec.x, y % vec.y);
+	Vector2 tmp(0,0);
+	!vec.x ? tmp.x = 1000000000 : x % vec.x;
+	!vec.y ? tmp.y = 1000000000 : y % vec.y;
+	return tmp;
 }
 
 Vector2 Vector2::operator+()const
@@ -140,10 +148,20 @@ Vector2 Vector2::operator-()const
 	return Vector2(-x,-y);
 }
 
-//Vector2& Vector2::operator++()
-//{
-//	return { 0,0};
-//}
+Vector2& Vector2::operator++()
+{
+	x++;
+	y++;
+	return *this;
+}
+
+Vector2 Vector2::operator++(int)
+{
+	Vector2 tmp = *this;
+	++*this;
+	return tmp;
+	// TODO: return ステートメントをここに挿入します
+}
 
 Vector2 operator+(const Vector2& vec, const int& num)
 {
