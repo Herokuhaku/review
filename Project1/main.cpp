@@ -19,6 +19,9 @@ int WINAPI WinMain(_In_ HINSTANCE hInstance, _In_opt_  HINSTANCE hPrevInstance, 
 	}
 	// Square‚ÌDraw‚ð•`‰æ‚·‚é
 	Shape *shape1 = new Square(Vector2(400, 400), Vector2(50, 50));
+	Vector2 a = {1,1};
+	Vector2 b = {1,1};
+	Vector2 c = {1,0};
 
 	while (!ProcessMessage() && !CheckHitKey(KEY_INPUT_ESCAPE))
 	{
@@ -27,6 +30,7 @@ int WINAPI WinMain(_In_ HINSTANCE hInstance, _In_opt_  HINSTANCE hPrevInstance, 
 		shape1->Draw();
 		shape1->Draw(Vector2(0,0),3);
 
+		a && b;
 		DrawLine(0-1,400-1,800-1,400-1,0xff0000);
 		DrawLine(400-1,0-1, 400-1, 800-1, 0xff0000);
 
