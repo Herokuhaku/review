@@ -18,10 +18,10 @@ int WINAPI WinMain(_In_ HINSTANCE hInstance, _In_opt_  HINSTANCE hPrevInstance, 
 		return 0;
 	}
 	// Square‚ÌDraw‚ð•`‰æ‚·‚é
-	Shape *shape1 = new Square(Vector2(400, 400), Vector2(50, 50));
-	Vector2 a = {1,1};
-	Vector2 b = {0,0};
-	Vector2 c = {0,0};
+	Shape *shape1 = new Square(Float2(400, 400), Float2(50, 50));
+	Float2 a = {1,1};
+	Float2 b = {0,0};
+	Float2 c = {0,0};
 
 	int k = 1;
 	int j = 0;
@@ -31,7 +31,7 @@ int WINAPI WinMain(_In_ HINSTANCE hInstance, _In_opt_  HINSTANCE hPrevInstance, 
 		ClearDrawScreen();
 		
 		shape1->Draw();
-		shape1->Draw(Vector2(0,0),3);
+		shape1->Draw(Float2(0,0),3);
 
 		DrawLine(0-1,400-1,800-1,400-1,0xff0000);
 		DrawLine(400-1,0-1, 400-1, 800-1, 0xff0000);

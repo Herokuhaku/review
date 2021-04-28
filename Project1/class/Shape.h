@@ -1,9 +1,10 @@
 #pragma once
 #include "../common/Vector2.h"
+
 class Shape
 {
 public:
-	Shape(Vector2 pos,Vector2 size);
+	Shape(Float2 pos, Float2 size);
 	~Shape();
 
 	// Draw‚ğŒÄ‚Ô
@@ -14,10 +15,10 @@ public:
 
 	// offset‚ğ’†S‚ÉŠg‘å‚µ‚Ä•`‰æ‚·‚é
 	// 1 : offset , 2 : Šg‘å—¦
-	virtual void Draw(Vector2 offset, float num = 1) = 0;
+	virtual void Draw(Float2 offset, float num = 1) = 0;
 protected:
 	// À•W
-	Vector2 pos_;
+	Float2 pos_;
 	// c‰¡‚Ì‘å‚«‚³
-	Vector2 size_;
+	Float2 size_;
 };
