@@ -15,6 +15,11 @@ Vector2Template<T>::Vector2Template(T x_, T y_)
 }
 
 template <class T>
+Vector2Template<T>::~Vector2Template()
+{
+}
+
+template <class T>
 Vector2Template<T>& Vector2Template<T>::operator=(const Vector2Template& vec)
 {
 	x = vec.x;
@@ -183,7 +188,27 @@ template <class T>
 Vector2Template<T> Vector2Template<T>::operator++(int)
 {
 	Vector2Template<T> tmp = *this;
-	++*this;
+	x++;
+	y++;
+	//++*this;
+	return tmp;
+	// TODO: return ステートメントをここに挿入します
+}
+
+template <class T>
+Vector2Template<T>& Vector2Template<T>::operator--()
+{
+	x--;
+	y--;
+	return *this;
+}
+
+template <class T>
+Vector2Template<T> Vector2Template<T>::operator--(int)
+{
+	Vector2Template<T> tmp = *this;
+	x--;
+	y--;
 	return tmp;
 	// TODO: return ステートメントをここに挿入します
 }

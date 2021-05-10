@@ -5,6 +5,7 @@ class Vector2Template
 {
 public:
 	Vector2Template();
+	~Vector2Template();
 	Vector2Template(T x_,T y_);
 	T x;
 	T y;
@@ -45,6 +46,9 @@ public:
 
 	Vector2Template& operator++();
 	Vector2Template operator++(int);
+
+	Vector2Template& operator--();
+	Vector2Template operator--(int);
 };
 
 // Vector2 ‚Æ int‚ÌŽl‘¥‰‰ŽZ

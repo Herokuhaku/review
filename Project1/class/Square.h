@@ -5,7 +5,7 @@ class Square:
 	public Shape
 {
 public:
-	Square(Float2 pos, Float2 size);
+	Square(Float2&& pos, Float2&& size);
 
 	// DrawBox‚ðŒÄ‚Ô
 	void Draw(void)override;

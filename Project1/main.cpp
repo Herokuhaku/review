@@ -1,4 +1,5 @@
 #include <DxLib.h>
+#include <memory>
 #include "class/Shape.h"
 #include "class/Square.h"
 
@@ -18,28 +19,27 @@ int WINAPI WinMain(_In_ HINSTANCE hInstance, _In_opt_  HINSTANCE hPrevInstance, 
 		return 0;
 	}
 	// Square‚ÌDraw‚ğ•`‰æ‚·‚é
-	Shape *shape1 = new Square(Float2(400, 400), Float2(50, 50));
-	Float2 a = {1,1};
-	Float2 b = {0,0};
-	Float2 c = {0,0};
+	// square‚ğmake_unique‚Åì‚é
+	std::unique_ptr<Shape> shape(std::make_unique<Square>(Float2(400, 400), Float2(50, 50)));
+	// new ‚Åì‚é
+	std::unique_ptr<Shape> shape_(new Square(Float2(400,400),Float2(50,50)));
+	// Šù‚É‚ ‚é‚â‚Â‚©‚çŠ—LŒ ‚ğ–á‚¤
+	std::unique_ptr<Shape> shape__(std::move(shape_));
+	// Š—LŒ “n‚µ‚½Œã‚É‹ó‚É‚È‚Á‚Ä‚é‚Ì‚Åì‚Á‚Æ‚­
+	shape_.reset(new Square(Float2(100, 100), Float2(50, 50)));
 
-	int k = 1;
-	int j = 0;
-	int l = 0; 
+	std::unique_ptr<Shape> test;
+	test = std::make_unique<Square>(Float2(400,400),Float2(50,50));
 	while (!ProcessMessage() && !CheckHitKey(KEY_INPUT_ESCAPE))
 	{
 		ClearDrawScreen();
-		
-		shape1->Draw();
-		shape1->Draw(Float2(0,0),3);
-
+		shape__->Draw(Float2(25, 25), 2);
+		shape__->Draw();
 		DrawLine(0-1,400-1,800-1,400-1,0xff0000);
 		DrawLine(400-1,0-1, 400-1, 800-1, 0xff0000);
-
-
+		
 		ScreenFlip();
 	}
 
-	delete shape1;
 	return 1;
 }

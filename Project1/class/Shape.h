@@ -4,7 +4,7 @@
 class Shape
 {
 public:
-	Shape(Float2 pos, Float2 size);
+	Shape(Float2&& pos, Float2&& size);
 	~Shape();
 
 	// Draw‚ðŒÄ‚Ô
