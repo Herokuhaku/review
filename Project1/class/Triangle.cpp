@@ -1,6 +1,7 @@
 #include <DxLib.h>
 #include <utility>
 #include <math.h>
+#include <vector>
 #include "Triangle.h"
 
 Triangle::Triangle(Float2&& pos,int&& size):Shape(std::move(pos))
@@ -15,36 +16,60 @@ Triangle::~Triangle()
 
 void Triangle::Draw(void)
 {
+    std::vector<Float2> point;
+    point.resize(3);
+
 	float height = sqrt(3) / 2.0 * size_;
-	Float2 teppen(pos_.x,pos_.y - (height/2));
-    Float2 left = teppen;
-    Float2 right = teppen;
+    int angle = 120 * 3.141592 / 180;
 
-    left.x -= pos_.x;
-    left.y -= pos_.y;
+    for (int i = 0; i < 3; i++)
+    {
+        point[i] = Float2(pos_.x, pos_.y - (height));
+    }
+    for (int i = 1; i < 3; i++)
+    {
+        i == 1 ? angle = angle :angle = -angle;
 
-    right.x -= pos_.x;
-    right.y -= pos_.y;
+        point[i].x -= pos_.x;
+        point[i].y -= pos_.y;
 
-    int langle = 60 * 3.141592 / 180;
-    int rangle = 120 * 3.141592 / 180;
-    Float2 n1;
-    n1.x = cos(langle) * left.x - sin(langle) * left.y;
-    n1.y = sin(langle) * left.x + cos(langle) * left.y;
-    
-    left.x = n1.x + pos_.x;
-    left.y = n1.y + pos_.y;
+        Float2 n;
+        n.x = cos(angle) * point[i].x - sin(angle) * point[i].y;
+        n.y = sin(angle) * point[i].x + cos(angle) * point[i].y;
 
-    Float2 n2;
-    n2.x = cos(rangle) * right.x - sin(rangle) * right.y;
-    n2.y = sin(rangle) * right.x + cos(rangle) * right.y;
+        point[i].x = n.x + pos_.x;
+        point[i].y = n.y + pos_.y;
+    }
 
-    right.x = n2.x + pos_.x;
-    right.y = n2.y + pos_.y;
-
-    DrawTriangle(teppen.x,teppen.y,left.x,left.y,right.x,right.y,0x00ffff,true);
+    DrawTriangle(point[0].x,point[0].y,point[1].x,point[1].y,point[2].x,point[2].y,0xff00ff,false);
 }
 
 void Triangle::Draw(float num)
 {
+    std::vector<Float2> point;
+    point.resize(3);
+
+    float height = sqrt(3) / 2.0 * (size_*num);
+    int angle = 120 * 3.141592 / 180;
+
+    for (int i = 0; i < 3; i++)
+    {
+        point[i] = Float2(pos_.x, pos_.y - (height));
+    }
+    for (int i = 1; i < 3; i++)
+    {
+        i == 1 ? angle = angle : angle = -angle;
+
+        point[i].x -= pos_.x;
+        point[i].y -= pos_.y;
+
+        Float2 n;
+        n.x = cos(angle) * point[i].x - sin(angle) * point[i].y;
+        n.y = sin(angle) * point[i].x + cos(angle) * point[i].y;
+
+        point[i].x = n.x + pos_.x;
+        point[i].y = n.y + pos_.y;
+    }
+
+    DrawTriangle(point[0].x, point[0].y, point[1].x, point[1].y, point[2].x, point[2].y, 0xff00ff,false);
 }

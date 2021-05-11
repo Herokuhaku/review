@@ -24,7 +24,7 @@ int WINAPI WinMain(_In_ HINSTANCE hInstance, _In_opt_  HINSTANCE hPrevInstance, 
 	// squareÇmake_uniqueÇ≈çÏÇÈ
 	std::vector<std::unique_ptr<Shape>> shape;
 	shape.reserve(3);
-	shape.emplace_back(std::make_unique<Square>(Float2(400, 400), Float2(50, 50)));
+	shape.emplace_back(std::make_unique<Square>(Float2(375,375), Float2(50, 50)));
 	//shape.emplace_back(std::make_unique<Circle>(Float2(400, 400),50));
 	shape.emplace_back(std::make_unique<Triangle>(Float2(400, 400), 50));
 
@@ -36,7 +36,7 @@ int WINAPI WinMain(_In_ HINSTANCE hInstance, _In_opt_  HINSTANCE hPrevInstance, 
 		ClearDrawScreen();
 		for (auto& sh : shape)
 		{
-			sh->Draw();
+			sh->Draw(2.0);
 		}
 
 		DrawLine(0-1,400-1,800-1,400-1,0xff0000);
