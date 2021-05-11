@@ -1,7 +1,9 @@
 #include <DxLib.h>
 #include <memory>
-#include "class/Shape.h"
+#include <vector>
 #include "class/Square.h"
+#include "class/Circle.h"
+#include "class/Triangle.h"
 
 bool SysInit()
 {
@@ -20,21 +22,23 @@ int WINAPI WinMain(_In_ HINSTANCE hInstance, _In_opt_  HINSTANCE hPrevInstance, 
 	}
 	// Square‚ÌDraw‚ğ•`‰æ‚·‚é
 	// square‚ğmake_unique‚Åì‚é
-	std::unique_ptr<Shape> shape(std::make_unique<Square>(Float2(400, 400), Float2(50, 50)));
-	// new ‚Åì‚é
-	std::unique_ptr<Shape> shape_(new Square(Float2(400,400),Float2(50,50)));
-	// Šù‚É‚ ‚é‚â‚Â‚©‚çŠ—LŒ ‚ğ–á‚¤
-	std::unique_ptr<Shape> shape__(std::move(shape_));
-	// Š—LŒ “n‚µ‚½Œã‚É‹ó‚É‚È‚Á‚Ä‚é‚Ì‚Åì‚Á‚Æ‚­
-	shape_.reset(new Square(Float2(100, 100), Float2(50, 50)));
+	std::vector<std::unique_ptr<Shape>> shape;
+	shape.reserve(3);
+	shape.emplace_back(std::make_unique<Square>(Float2(400, 400), Float2(50, 50)));
+	//shape.emplace_back(std::make_unique<Circle>(Float2(400, 400),50));
+	shape.emplace_back(std::make_unique<Triangle>(Float2(400, 400), 50));
 
-	std::unique_ptr<Shape> test;
-	test = std::make_unique<Square>(Float2(400,400),Float2(50,50));
+	//std::unique_ptr<Shape> shape1(std::make_unique<Square>(Float2(400, 400), Float2(50, 50)));
+	//std::unique_ptr<Shape> shape2(std::make_unique<Circle>(Float2(400, 400),50));
+
 	while (!ProcessMessage() && !CheckHitKey(KEY_INPUT_ESCAPE))
 	{
 		ClearDrawScreen();
-		shape__->Draw(Float2(25, 25), 2);
-		shape__->Draw();
+		for (auto& sh : shape)
+		{
+			sh->Draw();
+		}
+
 		DrawLine(0-1,400-1,800-1,400-1,0xff0000);
 		DrawLine(400-1,0-1, 400-1, 800-1, 0xff0000);
 		

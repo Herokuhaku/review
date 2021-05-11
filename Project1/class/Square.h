@@ -6,6 +6,7 @@ class Square:
 {
 public:
 	Square(Float2&& pos, Float2&& size);
+	~Square();
 
 	// DrawBox‚ğŒÄ‚Ô
 	void Draw(void)override;
@@ -15,5 +16,8 @@ public:
 	
 	// offset‚ğ’†S‚ÉŠg‘å—¦‚ğŒ³‚ÉDrawBox‚ğì‚é
 	// 1 : offset , 2 : Šg‘å—¦
-	void Draw(Float2 center,float num = 1);
+	void Draw(Float2 offset,float num = 1);
+private:
+	// c‰¡‚Ì‘å‚«‚³
+	Float2 size_;
 };

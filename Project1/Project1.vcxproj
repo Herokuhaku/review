@@ -153,17 +153,21 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="class\Circle.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="class\Shape.cpp" />
     <ClCompile Include="class\Square.cpp" />
+    <ClCompile Include="class\Triangle.cpp" />
     <ClCompile Include="_debug\_DebugConOut.cpp" />
     <ClCompile Include="_debug\_DebugDispOut.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="class\Circle.h" />
     <ClInclude Include="class\Shape.h" />
     <ClInclude Include="class\Square.h" />
     <ClInclude Include="common\detailes\Vector2.h" />
     <ClInclude Include="common\Vector2.h" />
+    <ClInclude Include="class\Triangle.h" />
     <ClInclude Include="_debug\_DebugConOut.h" />
     <ClInclude Include="_debug\_DebugDispOut.h" />
   </ItemGroup>

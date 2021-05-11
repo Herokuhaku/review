@@ -4,7 +4,7 @@
 class Shape
 {
 public:
-	Shape(Float2&& pos, Float2&& size);
+	Shape(Float2&& pos);
 	~Shape();
 
 	// Draw‚ğŒÄ‚Ô
@@ -15,10 +15,8 @@ public:
 
 	// offset‚ğ’†S‚ÉŠg‘å‚µ‚Ä•`‰æ‚·‚é
 	// 1 : offset , 2 : Šg‘å—¦
-	virtual void Draw(Float2 offset, float num = 1) = 0;
+	virtual void Draw(Float2 offset, float num = 1);
 protected:
 	// À•W
 	Float2 pos_;
-	// c‰¡‚Ì‘å‚«‚³
-	Float2 size_;
 };
