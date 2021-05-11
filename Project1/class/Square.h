@@ -7,7 +7,8 @@ class Square:
 public:
 	Square(Float2&& pos, Float2&& size);
 	~Square();
-
+	// Update
+	void Update(float delta)override;
 	// DrawBox‚ðŒÄ‚Ô
 	void Draw(void)override;
 	

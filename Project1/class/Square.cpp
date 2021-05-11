@@ -33,3 +33,13 @@ Square::Square(Float2&& pos, Float2&& size):Shape(std::move(pos))
 Square::~Square()
 {
 }
+
+void Square::Update(float delta)
+{
+	pos_.x += (delta * 100);
+	if (pos_.x > SCREEN)
+	{
+		pos_.x = -size_.x;
+	}
+	Draw();
+}

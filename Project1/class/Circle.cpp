@@ -12,6 +12,18 @@ Circle::~Circle()
 {
 }
 
+void Circle::Update(float delta)
+{
+	pos_.x += (delta * 100);
+	pos_.y += (delta * 100);
+	if (pos_.y > SCREEN + size_ && pos_.x > SCREEN)
+	{
+		pos_.y = -size_;
+		pos_.x = -size_;
+	}
+	Draw();
+}
+
 void Circle::Draw(void)
 {
 	DrawCircle(pos_.x,pos_.y,size_,0x0000FF);

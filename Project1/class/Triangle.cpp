@@ -14,6 +14,16 @@ Triangle::~Triangle()
 {
 }
 
+void Triangle::Update(float delta)
+{
+    pos_.y += (delta * 100);
+    if (pos_.y  > SCREEN + size_)
+    {
+        pos_.y = -size_;
+    }
+    Draw();
+}
+
 void Triangle::Draw(void)
 {
     std::vector<Float2> point;

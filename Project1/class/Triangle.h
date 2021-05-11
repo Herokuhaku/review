@@ -6,6 +6,8 @@ class Triangle :
 public:
 	Triangle(Float2&& pos,int&& size);
 	~Triangle();
+	
+	void Update(float delta)override;
 
 	// DrawBox‚ðŒÄ‚Ô
 	void Draw(void)override;

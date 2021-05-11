@@ -1,12 +1,15 @@
 #pragma once
 #include "../common/Vector2.h"
 
+#define SCREEN 800
+
 class Shape
 {
 public:
 	Shape(Float2&& pos);
 	~Shape();
 
+	virtual void Update(float delta) = 0;
 	// Draw‚ðŒÄ‚Ô
 	virtual void Draw(void) = 0;
 
