@@ -13,6 +13,7 @@ bool SysInit()
 {
 	SetGraphMode(800, 800, 32);
 	ChangeWindowMode(true);
+	SetWindowText("1916213_ç≤ì°çOìN");
 	if (DxLib_Init() == -1){
 		return false;
 	}
@@ -39,9 +40,10 @@ int WINAPI WinMain(_In_ HINSTANCE hInstance, _In_opt_  HINSTANCE hPrevInstance, 
 	start = std::chrono::system_clock::now();
 
 	
-	auto del = std::remove_if(shapes.begin(), shapes.end(), [&](auto shape) {
-
+	auto del = std::remove_if(shapes.begin(), shapes.end(), [&](auto& shape) {
+		return true;
 		});
+	shapes.erase(del,shapes.end());
 	while (!ProcessMessage() && !CheckHitKey(KEY_INPUT_ESCAPE))
 	{
 		end = std::chrono::system_clock::now();
