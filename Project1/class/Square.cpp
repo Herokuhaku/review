@@ -34,7 +34,7 @@ Square::~Square()
 {
 }
 
-void Square::Update(float delta)
+void Square::Update(double delta)
 {
 	pos_.x += (delta * 100);
 	if (pos_.x > SCREEN)

@@ -1,4 +1,5 @@
 #include <DxLib.h>
+#include <algorithm>
 #include <iostream>
 #include <memory>
 #include <vector>
@@ -6,6 +7,7 @@
 #include "class/Square.h"
 #include "class/Circle.h"
 #include "class/Triangle.h"
+#include "class/Star.h"
 
 bool SysInit()
 {
@@ -29,20 +31,22 @@ int WINAPI WinMain(_In_ HINSTANCE hInstance, _In_opt_  HINSTANCE hPrevInstance, 
 	shapes.emplace_back(std::make_unique<Square>(Float2(375,375), Float2(50, 50)));
 	shapes.emplace_back(std::make_unique<Circle>(Float2(400, 400),50));
 	shapes.emplace_back(std::make_unique<Triangle>(Float2(400, 400), 50));
+	shapes.emplace_back(std::make_unique<Star>(Float2(400, 400), 50));
 
 
 	std::chrono::system_clock::time_point  start, end;
 	end = std::chrono::system_clock::now();
 	start = std::chrono::system_clock::now();
 
-	//std::unique_ptr<Shape> shape1(std::make_unique<Square>(Float2(400, 400), Float2(50, 50)));
-	//std::unique_ptr<Shape> shape2(std::make_unique<Circle>(Float2(400, 400),50));
-	int k = 0;
+	
+	auto del = std::remove_if(shapes.begin(), shapes.end(), [&](auto shape) {
+
+		});
 	while (!ProcessMessage() && !CheckHitKey(KEY_INPUT_ESCAPE))
 	{
 		end = std::chrono::system_clock::now();
-		float del = std::chrono::duration_cast<std::chrono::milliseconds>(end - start).count(); //èàóùÇ…óvÇµÇΩéûä‘ÇïbÇ…ïœä∑
-		del /= 1000.0;
+		double del = std::chrono::duration_cast<std::chrono::nanoseconds>(end - start).count() / 1000000000.0; //èàóùÇ…óvÇµÇΩéûä‘ÇïbÇ…ïœä∑
+
 		start = std::chrono::system_clock::now();
 
 		ClearDrawScreen();
@@ -50,12 +54,10 @@ int WINAPI WinMain(_In_ HINSTANCE hInstance, _In_opt_  HINSTANCE hPrevInstance, 
 		{
 			shape->Update(del);
 		}
-
 		DrawLine(0-1,400-1,800-1,400-1,0xff0000);
 		DrawLine(400-1,0-1, 400-1, 800-1, 0xff0000);
 		
 		ScreenFlip();
-
 	}
 
 	return 1;

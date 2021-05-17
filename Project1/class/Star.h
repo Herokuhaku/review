@@ -2,13 +2,13 @@
 #include <vector>
 #include "Shape.h"
 #include "../common/Vector2.h"
-class Triangle :
+class Star :
 	public Shape
 {
 public:
-	Triangle(Float2&& pos,int&& size);
-	~Triangle();
-	
+	Star(Float2&& pos, int&& size);
+	~Star();
+
 	void Update(double delta)override;
 
 	// DrawBox‚ðŒÄ‚Ô
@@ -16,11 +16,11 @@ public:
 
 	// n”{‚ÌDraw
 	void Draw(float num)override;
+
+	void Init(void);
 private:
 	std::vector<Float2> point;
-	float height_;
-	double angle_;
 	int size_;
-	int sc;
+	int degree_;
+	double angle_;
 };
-

@@ -1,24 +1,25 @@
 #pragma once
-#include "Shape.h"
 #include "../common/Vector2.h"
-class Square:
+#include "Shape.h"
+class Heart :
 	public Shape
 {
 public:
-	Square(Float2&& pos, Float2&& size);
-	~Square();
+	Heart(Float2&& pos, int&& size);
+	~Heart();
 	// Update
 	void Update(double delta)override;
 	// DrawBox‚ğŒÄ‚Ô
 	void Draw(void)override;
-	
+
 	// n”{‚ÌDraw
 	void Draw(float num)override;
-	
+
 	// offset‚ğ’†S‚ÉŠg‘å—¦‚ğŒ³‚ÉDrawBox‚ğì‚é
 	// 1 : offset , 2 : Šg‘å—¦
-	void Draw(Float2 offset,float num = 1);
+	void Draw(Float2 offset, float num = 1);
 private:
-	// c‰¡‚Ì‘å‚«‚³
-	Float2 size_;
+	Float2 pos_;
+	int size_;
 };
+

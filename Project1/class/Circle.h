@@ -7,7 +7,7 @@ class Circle :
 public:
 	Circle(Float2&& pos, int&& size);
 	~Circle();
-	void Update(float delta)override;
+	void Update(double delta)override;
 	// DrawCircle‚ðŒÄ‚Ô
 	void Draw(void)override;
 
