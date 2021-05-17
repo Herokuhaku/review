@@ -8,6 +8,10 @@
 #include "class/Circle.h"
 #include "class/Triangle.h"
 #include "class/Star.h"
+#include "class/Heart.h"
+
+using UniqueShape = std::unique_ptr<Shape>;
+using ShapeVec = std::vector<UniqueShape>;
 
 bool SysInit()
 {
@@ -25,25 +29,26 @@ int WINAPI WinMain(_In_ HINSTANCE hInstance, _In_opt_  HINSTANCE hPrevInstance, 
 	if (!SysInit()){
 		return 0;
 	}
+
 	// SquareÇÃDrawÇï`âÊÇ∑ÇÈ
 	// squareÇmake_uniqueÇ≈çÏÇÈ
-	std::vector<std::unique_ptr<Shape>> shapes;
-	shapes.reserve(3);
+	ShapeVec shapes;
+	shapes.reserve(4);
 	shapes.emplace_back(std::make_unique<Square>(Float2(375,375), Float2(50, 50)));
 	shapes.emplace_back(std::make_unique<Circle>(Float2(400, 400),50));
 	shapes.emplace_back(std::make_unique<Triangle>(Float2(400, 400), 50));
 	shapes.emplace_back(std::make_unique<Star>(Float2(400, 400), 50));
-
+	shapes.emplace_back(std::make_unique<Heart>(Float2(400, 400), 50));
 
 	std::chrono::system_clock::time_point  start, end;
 	end = std::chrono::system_clock::now();
 	start = std::chrono::system_clock::now();
 
-	
-	auto del = std::remove_if(shapes.begin(), shapes.end(), [&](auto& shape) {
-		return true;
-		});
-	shapes.erase(del,shapes.end());
+	//auto del = std::remove_if(shapes.begin(), shapes.end(), [](UniqueShape& shape) {
+	//	shape->Draw();
+	//	return true;
+	//	});
+	//shapes.erase(del,shapes.end());
 	while (!ProcessMessage() && !CheckHitKey(KEY_INPUT_ESCAPE))
 	{
 		end = std::chrono::system_clock::now();

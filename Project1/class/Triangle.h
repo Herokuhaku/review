@@ -9,7 +9,7 @@ public:
 	Triangle(Float2&& pos,int&& size);
 	~Triangle();
 	
-	void Update(double delta)override;
+	void Update(float delta)override;
 
 	// DrawBox‚ðŒÄ‚Ô
 	void Draw(void)override;
@@ -20,7 +20,6 @@ private:
 	std::vector<Float2> point;
 	float height_;
 	double angle_;
-	int size_;
-	int sc;
+	float size_;
 };
 

@@ -15,7 +15,7 @@ Star::~Star()
 {
 }
 
-void Star::Update(double delta)
+void Star::Update(float delta)
 {
     pos_.x += (delta * 100);
     pos_.y -= (delta * 100);
@@ -36,7 +36,7 @@ void Star::Draw(void)
     
     for (int i = 1; i < 5; i++)
     {
-        angle_ = (i*degree_) * 3.141592 / 180;
+        angle_ = (i* static_cast<double>(degree_)) * 3.141592 / 180;
 
         point[i] -= pos_;
 
@@ -65,7 +65,7 @@ void Star::Draw(float num)
 
     for (int i = 1; i < 5; i++)
     {
-        angle_ = (i * degree_) * 3.141592 / 180;
+        angle_ = (i * static_cast<double>(degree_)) * 3.141592 / 180;
 
         point[i] -= pos_;
 

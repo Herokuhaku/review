@@ -9,7 +9,7 @@ public:
 	Star(Float2&& pos, int&& size);
 	~Star();
 
-	void Update(double delta)override;
+	void Update(float delta)override;
 
 	// DrawBox‚ðŒÄ‚Ô
 	void Draw(void)override;

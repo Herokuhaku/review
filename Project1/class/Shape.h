@@ -9,7 +9,7 @@ public:
 	Shape(Float2&& pos);
 	~Shape();
 
-	virtual void Update(double delta) = 0;
+	virtual void Update(float delta) = 0;
 	// Draw‚ðŒÄ‚Ô
 	virtual void Draw(void) = 0;
 

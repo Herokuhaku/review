@@ -12,7 +12,7 @@ Circle::~Circle()
 {
 }
 
-void Circle::Update(double delta)
+void Circle::Update(float delta)
 {
 	pos_.x += (delta * 100);
 	pos_.y += (delta * 100);
