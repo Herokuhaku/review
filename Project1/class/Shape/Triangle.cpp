@@ -4,18 +4,18 @@
 #include <vector>
 #include "Triangle.h"
 
-Triangle::Triangle(Float2&& pos,int&& size):Shape(std::move(pos))
+Triangle::Triangle(Float2&& pos,int&& size,int&& mynum):Shape(std::move(pos),mynum)
 {
 	pos_ = pos;
 	size_ = size;
-    point.resize(3);
+    Init();
 }
 
 Triangle::~Triangle()
 {
 }
 
-void Triangle::Update(float delta)
+void Triangle::Update(float delta, ShapeVec& shapes)
 {
     pos_.y += (delta * 100);
     if (pos_.y  > SCREEN + size_)
@@ -73,4 +73,10 @@ void Triangle::Draw(float num)
     DrawTriangle(point[0].x, point[0].y, point[1].x, point[1].y, point[2].x, point[2].y, 0xff00ff, false);
     DrawCircle(pos_.x, pos_.y, 50, 0xffffff, false);
     DrawCircle(pos_.x, pos_.y, 2, 0xffffff);
+}
+
+void Triangle::Init(void)
+{
+    stype_ = ShapeType::Triangle;
+    point.resize(3);
 }

@@ -24,22 +24,38 @@ void Square::Draw(Float2 offset,float num)
 		static_cast<int>(pos_.x + (size.x/2) + offset.x), static_cast<int>(pos_.y +(size.y/2) + offset.y), 0x00FF00,false);
 }
 
-Square::Square(Float2&& pos, Float2&& size):Shape(std::move(pos))
+bool Square::HitCheck(ShapeVec& shapes)
+{
+	for (auto& shape : shapes)
+	{
+		// ŽlŠp‚ÆŽlŠp‚Ì”»’è
+	}
+	return false;
+}
+
+void Square::Init(void)
+{
+	stype_ = ShapeType::Square;
+}
+
+Square::Square(Float2&& pos, Float2&& size, int&& mynum):Shape(std::move(pos),mynum)
 {
 	pos_ = pos;
 	size_ = size;
+	Init();
 }
 
 Square::~Square()
 {
 }
 
-void Square::Update(float delta)
+void Square::Update(float delta, ShapeVec& shapes)
 {
-	pos_.x += (delta * 100);
-	if (pos_.x > SCREEN)
-	{
-		pos_.x = -size_.x;
+	reverse_ ? pos_.x += delta * 100 : pos_.x -= delta * 100;
+	if (pos_.x < 0 || pos_.x > SCREEN) {
+		reverse_ = !reverse_;
 	}
+
+
 	Draw();
 }

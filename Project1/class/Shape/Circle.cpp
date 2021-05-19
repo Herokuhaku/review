@@ -1,18 +1,18 @@
 #include <DxLib.h>
-#include <utility>
 #include "Circle.h"
 
-Circle::Circle(Float2&& pos, int&& size):Shape(std::move(pos))
+Circle::Circle(Float2&& pos, int&& size, int&& mynum):Shape(std::move(pos),mynum)
 {
 	pos_ = pos;
 	size_ = size;
+	Init();
 }
 
 Circle::~Circle()
 {
 }
 
-void Circle::Update(float delta)
+void Circle::Update(float delta, ShapeVec& shapes)
 {
 	pos_.x += (delta * 100);
 	pos_.y += (delta * 100);
@@ -32,4 +32,9 @@ void Circle::Draw(void)
 void Circle::Draw(float num)
 {
 	DrawCircle(pos_.x, pos_.y,size_ * num, 0x0000FF);
+}
+
+void Circle::Init(void)
+{
+	stype_ = ShapeType::Circle;
 }

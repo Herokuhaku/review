@@ -4,7 +4,7 @@
 #include <vector>
 #include "Star.h"
 
-Star::Star(Float2&& pos, int&& size):Shape(std::move(pos))
+Star::Star(Float2&& pos, int&& size, int&& mynum):Shape(std::move(pos),mynum)
 {
     pos_ = pos;
     size_ = size;
@@ -15,7 +15,7 @@ Star::~Star()
 {
 }
 
-void Star::Update(float delta)
+void Star::Update(float delta, ShapeVec& shapes)
 {
     pos_.x += (delta * 100);
     pos_.y -= (delta * 100);
@@ -87,6 +87,7 @@ void Star::Draw(float num)
 
 void Star::Init(void)
 {
+    stype_ = ShapeType::Star;
     degree_ = 72;
     point.resize(5);
 }

@@ -153,27 +153,29 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="class\Circle.cpp" />
-    <ClCompile Include="class\Heart.cpp" />
+    <ClCompile Include="class\Shape\Circle.cpp" />
+    <ClCompile Include="class\Shape\Heart.cpp" />
     <ClCompile Include="main.cpp" />
-    <ClCompile Include="class\Shape.cpp" />
-    <ClCompile Include="class\Square.cpp" />
-    <ClCompile Include="class\Triangle.cpp" />
-    <ClCompile Include="class\Star.cpp" />
+    <ClCompile Include="class\Shape\Shape.cpp" />
+    <ClCompile Include="class\Shape\Square.cpp" />
+    <ClCompile Include="class\Shape\Triangle.cpp" />
+    <ClCompile Include="class\Shape\Star.cpp" />
     <ClCompile Include="_debug\_DebugConOut.cpp" />
     <ClCompile Include="_debug\_DebugDispOut.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="class\Circle.h" />
-    <ClInclude Include="class\Shape.h" />
-    <ClInclude Include="class\Square.h" />
+    <ClInclude Include="class\func\Square_Square.h" />
+    <ClInclude Include="class\Shape\Circle.h" />
+    <ClInclude Include="class\Shape\Shape.h" />
+    <ClInclude Include="class\Shape\Square.h" />
     <ClInclude Include="common\detailes\Vector2.h" />
     <ClInclude Include="common\Vector2.h" />
-    <ClInclude Include="class\Triangle.h" />
-    <ClInclude Include="class\Star.h" />
-    <ClInclude Include="class\Heart.h" />
+    <ClInclude Include="class\Shape\Triangle.h" />
+    <ClInclude Include="class\Shape\Star.h" />
+    <ClInclude Include="class\Shape\Heart.h" />
     <ClInclude Include="_debug\_DebugConOut.h" />
     <ClInclude Include="_debug\_DebugDispOut.h" />
+    <ClInclude Include="class\func\HitCheckShapes.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

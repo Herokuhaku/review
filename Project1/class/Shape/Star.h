@@ -1,15 +1,14 @@
 #pragma once
 #include <vector>
 #include "Shape.h"
-#include "../common/Vector2.h"
 class Star :
 	public Shape
 {
 public:
-	Star(Float2&& pos, int&& size);
+	Star(Float2&& pos, int&& size, int&& mynum);
 	~Star();
 
-	void Update(float delta)override;
+	void Update(float delta, ShapeVec& shapes)override;
 
 	// DrawBox‚ðŒÄ‚Ô
 	void Draw(void)override;
@@ -17,7 +16,7 @@ public:
 	// n”{‚ÌDraw
 	void Draw(float num)override;
 
-	void Init(void);
+	void Init(void)override;
 private:
 	std::vector<Float2> point;
 	int size_;
