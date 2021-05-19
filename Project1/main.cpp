@@ -28,14 +28,14 @@ int WINAPI WinMain(_In_ HINSTANCE hInstance, _In_opt_  HINSTANCE hPrevInstance, 
 		return 0;
 	}
 
-	std::map<int,std::vector<std::pair<Float2, int>>> hitcircle_;
-
+	HitCircle hitcircle_;
+	int shapeNum = 0;
 	// Square‚ÌDraw‚ğ•`‰æ‚·‚é
 	// square‚ğmake_unique‚Åì‚é
 	ShapeVec shapes;
 	shapes.reserve(4);
-	shapes.emplace_back(std::make_unique<Square>(Float2(375,375), Float2(50, 50),shapes.size()));
-	shapes.emplace_back(std::make_unique<Square>(Float2(475,475), Float2(50, 50), shapes.size()));
+	shapes.emplace_back(std::make_unique<Square>(Float2(375,375), Float2(50, 50), hitcircle_,shapeNum++,shapeNum));
+	shapes.emplace_back(std::make_unique<Square>(Float2(475,475), Float2(50, 50), hitcircle_, shapeNum++,shapeNum));
 	//shapes.emplace_back(std::make_unique<Circle>(Float2(400, 400),50));
 	//shapes.emplace_back(std::make_unique<Triangle>(Float2(400, 400), 50));
 	//shapes.emplace_back(std::make_unique<Star>(Float2(400, 400), 50));
@@ -46,7 +46,7 @@ int WINAPI WinMain(_In_ HINSTANCE hInstance, _In_opt_  HINSTANCE hPrevInstance, 
 	start = std::chrono::system_clock::now();
 
 	//auto del = std::remove_if(shapes.begin(), shapes.end(), [](UniqueShape& shape) {
-	//	shape->Draw();
+	//	shape->Draw();0
 	//	return true;
 	//	});
 	//shapes.erase(del,shapes.end());

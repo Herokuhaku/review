@@ -4,7 +4,7 @@ class Square:
 	public Shape
 {
 public:
-	Square(Float2&& pos, Float2&& size, int&& mynum);
+	Square(Float2&& pos, Float2&& size,HitCircle& hit,int mynum,int& allnum);
 	~Square();
 	// Update
 	void Update(float delta, ShapeVec& shapes)override;
@@ -25,5 +25,6 @@ public:
 private:
 	// c‰¡‚Ì‘å‚«‚³
 	Float2 size_;
-	bool reverse_;
+	std::pair<bool,bool> reverse_;
+	int* allnumber_;
 };

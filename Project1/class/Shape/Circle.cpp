@@ -1,7 +1,7 @@
 #include <DxLib.h>
 #include "Circle.h"
 
-Circle::Circle(Float2&& pos, int&& size, int&& mynum):Shape(std::move(pos),mynum)
+Circle::Circle(Float2&& pos, int&& size, HitCircle& hit, int mynum):Shape(std::move(pos),mynum, hit)
 {
 	pos_ = pos;
 	size_ = size;

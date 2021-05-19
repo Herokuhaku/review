@@ -5,7 +5,7 @@ class Circle :
 	public Shape
 {
 public:
-	Circle(Float2&& pos, int&& size, int&& mynum);
+	Circle(Float2&& pos, int&& size, HitCircle& hit, int mynum);
 	~Circle();
 	void Update(float delta,ShapeVec& shapes)override;
 	// DrawCircle‚ðŒÄ‚Ô

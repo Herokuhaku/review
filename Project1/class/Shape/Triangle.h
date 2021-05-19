@@ -5,7 +5,7 @@ class Triangle :
 	public Shape
 {
 public:
-	Triangle(Float2&& pos,int&& size,int&& mynum);
+	Triangle(Float2&& pos,int&& size, HitCircle& hit, int mynum);
 	~Triangle();
 	
 	void Update(float delta, ShapeVec& shapes)override;
