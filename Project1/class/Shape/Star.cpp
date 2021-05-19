@@ -4,7 +4,7 @@
 #include <vector>
 #include "Star.h"
 
-Star::Star(Float2&& pos, int&& size, HitCircle& hit, int mynum):Shape(std::move(pos),mynum, hit)
+Star::Star(Float2&& pos, int&& size, HitCircle& hit, int mynum, int& allnum):Shape(std::move(pos),mynum, hit,allnum)
 {
     pos_ = pos;
     size_ = size;

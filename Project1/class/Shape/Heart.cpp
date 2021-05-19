@@ -3,7 +3,7 @@
 #include <math.h>
 #include "Heart.h"
 
-Heart::Heart(Float2&& pos, int&& size, HitCircle& hit, int mynum) :Shape(std::move(pos),mynum, hit)
+Heart::Heart(Float2&& pos, int&& size, HitCircle& hit, int mynum, int& allnum) :Shape(std::move(pos),mynum, hit,allnum)
 {
 	pos_ = pos;
 	size_ = size;

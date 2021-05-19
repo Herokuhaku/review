@@ -36,7 +36,8 @@ int WINAPI WinMain(_In_ HINSTANCE hInstance, _In_opt_  HINSTANCE hPrevInstance, 
 	shapes.reserve(4);
 	shapes.emplace_back(std::make_unique<Square>(Float2(375,375), Float2(50, 50), hitcircle_,shapeNum++,shapeNum));
 	shapes.emplace_back(std::make_unique<Square>(Float2(475,475), Float2(50, 50), hitcircle_, shapeNum++,shapeNum));
-	//shapes.emplace_back(std::make_unique<Circle>(Float2(400, 400),50));
+	shapes.emplace_back(std::make_unique<Circle>(Float2(475, 475),25, hitcircle_, shapeNum++, shapeNum));
+	//shapes.emplace_back(std::make_unique<Square>(Float2(475, 475), Float2(50, 50), hitcircle_, shapeNum++, shapeNum));
 	//shapes.emplace_back(std::make_unique<Triangle>(Float2(400, 400), 50));
 	//shapes.emplace_back(std::make_unique<Star>(Float2(400, 400), 50));
 	//shapes.emplace_back(std::make_unique<Heart>(Float2(400, 400), 50));
@@ -58,15 +59,27 @@ int WINAPI WinMain(_In_ HINSTANCE hInstance, _In_opt_  HINSTANCE hPrevInstance, 
 		start = std::chrono::system_clock::now();
 
 		ClearDrawScreen();
+		// æ‚ÉDraw‚ðì‚Á‚Ä“–‚½‚è”»’è‚ðì‚é
+		for (auto& shape : shapes)
+		{
+			shape->Draw();
+		}
+		// Update
 		for (auto& shape : shapes)
 		{
 			shape->Update(del,shapes);
+			//shape->HitDraw();
 		}
 
 		DrawLine(0-1,400-1,800-1,400-1,0xff0000);
 		DrawLine(400-1,0-1, 400-1, 800-1, 0xff0000);
 		
 		ScreenFlip();
+		// “–‚½‚è”»’è‚ÌƒŠƒZƒbƒg
+		for (auto& shape : shapes)
+		{
+			shape->ClearHitCheck();
+		}
 	}
 
 	return 1;

@@ -28,7 +28,7 @@ enum class ShapeType {
 class Shape
 {
 public:
-	Shape(Float2&& pos,int num,HitCircle& hit);
+	Shape(Float2&& pos,int num,HitCircle& hit, int& allnum);
 	~Shape();
 
 	// Update
@@ -43,14 +43,20 @@ public:
 	// 1 : offset , 2 : 拡大率
 	virtual void Draw(Float2 offset, float num = 1);
 
-	// 当たり判定
-	virtual bool HitCheck(ShapeVec& shapes);
+
 	// 形
 	virtual ShapeType GetType(void);
 	// ヒットボックス呼び出し
 	virtual HitPairVec GetHitPairVec(void);
 	// 自分の生成番号呼び出し
 	virtual int GetMynum(void);
+
+	// 当たり判定
+	bool HitCheck(ShapeVec& shapes);
+	// 円の判定視覚化
+	void HitDraw(void);
+	// 当たり判定の削除
+	void ClearHitCheck(void);
 private:
 	// 初期値設定
 	virtual void Init(void);
@@ -64,4 +70,7 @@ protected:
 	ShapeType stype_;
 	int color_;
 	std::function<bool(UniqueShape& shape1, UniqueShape& shape2)> hitCheckShapes_;
+	bool hitnow_;
+	bool otherflag;
+	int* allnumber_;
 };

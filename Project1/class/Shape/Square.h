@@ -17,14 +17,10 @@ public:
 	// offset‚ğ’†S‚ÉŠg‘å—¦‚ğŒ³‚ÉDrawBox‚ğì‚é
 	// 1 : offset , 2 : Šg‘å—¦
 	void Draw(Float2 offset,float num = 1);
-
-	// “–‚½‚è”»’è
-	bool HitCheck(ShapeVec& shapes)override;
-
+	// ‰Šú’lİ’è
 	void Init(void)override;
 private:
 	// c‰¡‚Ì‘å‚«‚³
 	Float2 size_;
 	std::pair<bool,bool> reverse_;
-	int* allnumber_;
 };

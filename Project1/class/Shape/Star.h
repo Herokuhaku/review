@@ -5,7 +5,7 @@ class Star :
 	public Shape
 {
 public:
-	Star(Float2&& pos, int&& size, HitCircle& hit, int mynum);
+	Star(Float2&& pos, int&& size, HitCircle& hit, int mynum, int& allnum);
 	~Star();
 
 	void Update(float delta, ShapeVec& shapes)override;
