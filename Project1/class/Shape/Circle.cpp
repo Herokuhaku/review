@@ -1,7 +1,7 @@
 #include <DxLib.h>
 #include "Circle.h"
 
-Circle::Circle(Float2&& pos, int&& size, HitCircle& hit, int mynum, int& allnum):Shape(std::move(pos),mynum, hit,allnum)
+Circle::Circle(Float2&& pos, Float2&& vec, int&& size, int mynum):Shape(std::move(pos),vec,mynum)
 {
 	pos_ = pos;
 	size_ = size;
@@ -14,13 +14,8 @@ Circle::~Circle()
 
 void Circle::Update(float delta, ShapeVec& shapes)
 {
-	pos_.x += (delta * 100);
-	pos_.y += (delta * 100);
-	if (pos_.y > SCREEN + size_ && pos_.x > SCREEN)
-	{
-		pos_.y = -size_;
-		pos_.x = -size_;
-	}
+	pos_ += (vec_ * delta);
+
 	if (HitCheck(shapes))
 	{
 		color_ = rand() % 0x777777 + 0x777777;

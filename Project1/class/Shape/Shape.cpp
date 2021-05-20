@@ -1,7 +1,7 @@
 #include <DxLib.h>
 #include "Shape.h"
 
-Shape::Shape(Float2&& pos, int num, HitCircle& hit, int& allnum):pos_(pos),mynumber_(num),Allhit_(hit)
+Shape::Shape(Float2&& pos, Float2& vec, int num):pos_(pos),mynumber_(num),vec_(vec)
 {
 	Init();
 }
@@ -15,6 +15,7 @@ void Shape::Draw(Float2 offset, float num)
 
 bool Shape::HitCheck(ShapeVec& shapes)
 {
+	screenhit_ = false;
 	otherflag = false;
 	bool rtnflag_ = false;
 	Float2 circle(0, 0);
@@ -41,6 +42,51 @@ bool Shape::HitCheck(ShapeVec& shapes)
 			}
 		}
 	}
+	for (auto& hit : hit_)
+	{
+		if (!allscreenhit_) {
+			if (hit.first.x <= hit.second) {
+				vec_.x = -vec_.x;
+				allscreenhit_ = true;
+				hitnow_ = true;
+				otherflag = true;
+				rtnflag_ = true;
+			}
+			if (SCREEN - hit.first.x <= hit.second)
+			{
+				vec_.x = -vec_.x;
+				allscreenhit_ = true;
+				hitnow_ = true;
+				otherflag = true;
+				rtnflag_ = true;
+			}
+			else if (hit.first.y <= hit.second) {
+				vec_.y = -vec_.y;
+				allscreenhit_ = true;
+				hitnow_ = true;
+				otherflag = true;
+				rtnflag_ = true;
+			}
+			if (SCREEN - hit.first.y <= hit.second)
+			{
+				vec_.y = -vec_.y;
+				allscreenhit_ = true;
+				hitnow_ = true;
+				otherflag = true;
+				rtnflag_ = true;
+			}
+		}
+	}
+	for (auto& hit : hit_)
+	{
+		if(!(!(hit.first.x <= hit.second) && !(SCREEN - hit.first.x <= hit.second) && !(hit.first.y <= hit.second) && !(SCREEN - hit.first.y <= hit.second)))
+		{
+			screenhit_ = true;
+		}
+	}
+	if (!screenhit_) {
+		allscreenhit_ = false;
+	}
 	// “–‚½‚Á‚Ä‚¢‚é”»’è‚Å‚Í‚ ‚é‚¯‚Ç1‚Â‚É‚à“–‚½‚Á‚Ä‚¢‚È‚¢ê‡‚É
 	// “–‚½‚Á‚Ä‚¢‚È‚¢”»’è‚É–ß‚·
 	if (hitnow_ && !otherflag) {
@@ -53,7 +99,7 @@ void Shape::HitDraw(void)
 {
 	for (auto& hit : hit_)
 	{
-		DrawCircle(hit.first.x, hit.first.y,hit.second,0xffffff);
+		DrawCircle(hit.first.x, hit.first.y,hit.second,0xffffff,false);
 	}
 }
 
@@ -80,7 +126,7 @@ int Shape::GetMynum(void)
 void Shape::Init(void)
 {
 	stype_ = ShapeType::NON;
-	Allhit_.try_emplace(mynumber_);
-	color_ = 0xffffff;
+	color_ = (rand ()*mynumber_) % 0xffffff;
 	hitnow_ = false;
+	screenhit_ = false;
 }

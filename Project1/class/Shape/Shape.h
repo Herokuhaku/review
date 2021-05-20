@@ -28,7 +28,7 @@ enum class ShapeType {
 class Shape
 {
 public:
-	Shape(Float2&& pos,int num,HitCircle& hit, int& allnum);
+	Shape(Float2&& pos,Float2& vec,int num);
 	~Shape();
 
 	// Update
@@ -64,13 +64,14 @@ private:
 protected:
 	// ç¿ïW
 	Float2 pos_;
+	Float2 vec_;
 	int mynumber_;
-	HitCircle Allhit_;
 	HitPairVec hit_;
 	ShapeType stype_;
 	int color_;
 	std::function<bool(UniqueShape& shape1, UniqueShape& shape2)> hitCheckShapes_;
 	bool hitnow_;
 	bool otherflag;
-	int* allnumber_;
+	bool screenhit_;
+	bool allscreenhit_;
 };

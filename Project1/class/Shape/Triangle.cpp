@@ -4,7 +4,7 @@
 #include <vector>
 #include "Triangle.h"
 
-Triangle::Triangle(Float2&& pos,int&& size, HitCircle& hit, int mynum, int& allnum):Shape(std::move(pos),mynum, hit,allnum)
+Triangle::Triangle(Float2&& pos, Float2&& vec, int&& size, int mynum):Shape(std::move(pos), vec, mynum)
 {
 	pos_ = pos;
 	size_ = size;
@@ -17,12 +17,11 @@ Triangle::~Triangle()
 
 void Triangle::Update(float delta, ShapeVec& shapes)
 {
-    pos_.y += (delta * 100);
-    if (pos_.y  > SCREEN + size_)
+    pos_ += (vec_ * delta);
+    if (HitCheck(shapes))
     {
-        pos_.y = -size_;
+        color_ = rand() % 0x777777 + 0x123456;
     }
-    Draw();
 }
 
 void Triangle::Draw(void)
@@ -48,6 +47,11 @@ void Triangle::Draw(void)
     DrawTriangle(point[0].x,point[0].y,point[1].x,point[1].y,point[2].x,point[2].y,0xff00ff,false);
     DrawCircle(pos_.x, pos_.y,2, 0xffffff);
 
+    hit_.emplace_back(Float2(pos_.x + (pos_.x - point[0].x)/2,pos_.y - (pos_.y - point[0].y) / 2), size_ / 2.75);
+    hit_.emplace_back(Float2(pos_.x + (pos_.x - point[1].x) / 2, pos_.y - (pos_.y - point[1].y) / 2), size_ / 2.75);
+    hit_.emplace_back(Float2(pos_.x + (pos_.x - point[2].x) / 2, pos_.y - (pos_.y - point[2].y) / 2), size_ / 2.75);
+    //hit_.emplace_back(Float2(pos_.x, pos_.y), size_ / 3);
+    //hit_.emplace_back(Float2(pos_.x, pos_.y), size_ / 3);
 }
 
 void Triangle::Draw(float num)
@@ -71,8 +75,11 @@ void Triangle::Draw(float num)
         point[i] = n + pos_;
     }
     DrawTriangle(point[0].x, point[0].y, point[1].x, point[1].y, point[2].x, point[2].y, 0xff00ff, false);
-    DrawCircle(pos_.x, pos_.y, 50, 0xffffff, false);
-    DrawCircle(pos_.x, pos_.y, 2, 0xffffff);
+
+
+    hit_.emplace_back(Float2(pos_.x + (pos_.x - point[0].x) / 2, pos_.y - (pos_.y - point[0].y) / 2), (size_*num) / 3);
+    hit_.emplace_back(Float2(pos_.x + (pos_.x - point[1].x) / 2, pos_.y - (pos_.y - point[1].y) / 2), (size_ * num) / 3);
+    hit_.emplace_back(Float2(pos_.x + (pos_.x - point[2].x) / 2, pos_.y - (pos_.y - point[2].y) / 2), (size_ * num) / 3);
 }
 
 void Triangle::Init(void)

@@ -4,7 +4,7 @@ class Square:
 	public Shape
 {
 public:
-	Square(Float2&& pos, Float2&& size,HitCircle& hit,int mynum,int& allnum);
+	Square(Float2&& pos, Float2&& vec, Float2&& size,int mynum);
 	~Square();
 	// Update
 	void Update(float delta, ShapeVec& shapes)override;

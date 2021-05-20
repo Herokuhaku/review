@@ -6,7 +6,7 @@ class Heart :
 	public Shape
 {
 public:
-	Heart(Float2&& pos, int&& size, HitCircle& hit, int mynum, int& allnum);
+	Heart(Float2&& pos, Float2&& vec, int&& size, int mynum);
 	~Heart();
 	// Update
 	void Update(float delta, ShapeVec& shapes)override;
@@ -21,9 +21,9 @@ private:
 	float height_;
 	double angle_;
 	float size_;
-	int scr_;
-	int heart_;
 
 	bool reverse_;
+
+	int heartsave_;
 };
 

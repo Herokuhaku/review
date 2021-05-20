@@ -37,13 +37,13 @@ void Square::Init(void)
 	if (mynumber_ % 2 == 0) {
 		reverse_.first = true;
 		reverse_.second = true;
+		color_ = 0xffffff;
 	}
 }
-Square::Square(Float2&& pos, Float2&& size,HitCircle& hit,int mynum,int& allnum):Shape(std::move(pos),mynum,hit,allnum)
+Square::Square(Float2&& pos, Float2&& vec, Float2&& size,int mynum):Shape(std::move(pos), vec, mynum)
 {
 	pos_ = pos;
 	size_ = size;
-	allnumber_ = &allnum;
 	Init();
 }
 
@@ -54,21 +54,10 @@ Square::~Square()
 void Square::Update(float delta, ShapeVec& shapes)
 {
 	//reverse_.first ? pos_.x += delta * 100:pos_.x -= delta * 100;
-	reverse_.first ? pos_.x += 3 : pos_.x -= 3;
-	if ((pos_.x < 0 || pos_.x > SCREEN)) {
-		reverse_.first = !reverse_.first;
-	}
-//	reverse_.second ? pos_.y += delta * 100 : pos_.y-= delta * 100;
-	reverse_.second ? pos_.y += 3 : pos_.y -= 3;
-	if ((pos_.y < 0 || pos_.y > SCREEN)) {
-		reverse_.second = !reverse_.second;
-	}
+	pos_ += (vec_ * delta);
 
 	if (HitCheck(shapes))
 	{
-		color_ = rand() % 0x777777 + 0x777777;
-		//shapes.emplace_back(std::make_unique<Square>(Float2(475, 475), Float2(50, 50), Allhit_,*allnumber_++,*allnumber_));
+		color_ = rand() % 0x777777 + 0x123456;
 	}
-
-
 }

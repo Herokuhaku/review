@@ -4,7 +4,7 @@
 #include <vector>
 #include "Star.h"
 
-Star::Star(Float2&& pos, int&& size, HitCircle& hit, int mynum, int& allnum):Shape(std::move(pos),mynum, hit,allnum)
+Star::Star(Float2&& pos, Float2&& vec, int&& size,int mynum):Shape(std::move(pos),vec, mynum)
 {
     pos_ = pos;
     size_ = size;
@@ -17,14 +17,11 @@ Star::~Star()
 
 void Star::Update(float delta, ShapeVec& shapes)
 {
-    pos_.x += (delta * 100);
-    pos_.y -= (delta * 100);
-    if (pos_.y < 0 && pos_.x > SCREEN)
+    pos_ += (vec_ * delta);
+    if (HitCheck(shapes))
     {
-        pos_.y = SCREEN+size_;
-        pos_.x = -size_;
+        color_ = rand() % 0x777777 + 0x123456;
     }
-	Draw();
 }
 
 void Star::Draw(void)
@@ -54,6 +51,7 @@ void Star::Draw(void)
         DrawLine(point[3].x, point[3].y, point[0].x, point[0].y, 0xffffff, true);
     }
     DrawCircle(pos_.x,pos_.y,2,0xffffff);
+    hit_.emplace_back(Float2(pos_.x,pos_.y),size_);
 }
 
 void Star::Draw(float num)
@@ -83,6 +81,7 @@ void Star::Draw(float num)
         DrawLine(point[3].x, point[3].y, point[0].x, point[0].y, 0xffffff, true);
     }
     DrawCircle(pos_.x, pos_.y, 2, 0xffffff);
+    hit_.emplace_back(Float2(pos_.x, pos_.y), size_*num);
 }
 
 void Star::Init(void)

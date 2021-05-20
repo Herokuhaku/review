@@ -33,14 +33,14 @@ int WINAPI WinMain(_In_ HINSTANCE hInstance, _In_opt_  HINSTANCE hPrevInstance, 
 	// SquareÇÃDrawÇï`âÊÇ∑ÇÈ
 	// squareÇmake_uniqueÇ≈çÏÇÈ
 	ShapeVec shapes;
-	shapes.reserve(4);
-	shapes.emplace_back(std::make_unique<Square>(Float2(375,375), Float2(50, 50), hitcircle_,shapeNum++,shapeNum));
-	shapes.emplace_back(std::make_unique<Square>(Float2(475,475), Float2(50, 50), hitcircle_, shapeNum++,shapeNum));
-	shapes.emplace_back(std::make_unique<Circle>(Float2(475, 475),25, hitcircle_, shapeNum++, shapeNum));
-	//shapes.emplace_back(std::make_unique<Square>(Float2(475, 475), Float2(50, 50), hitcircle_, shapeNum++, shapeNum));
-	//shapes.emplace_back(std::make_unique<Triangle>(Float2(400, 400), 50));
-	//shapes.emplace_back(std::make_unique<Star>(Float2(400, 400), 50));
-	//shapes.emplace_back(std::make_unique<Heart>(Float2(400, 400), 50));
+	shapes.emplace_back(std::make_unique<Square>(Float2(375,375),Float2(100,50), Float2(50, 50),shapeNum++));
+	shapes.emplace_back(std::make_unique<Square>(Float2(475,475),Float2(50,-100), Float2(50, 50), shapeNum++));
+	shapes.emplace_back(std::make_unique<Circle>(Float2(475, 475),Float2(-75,100),25, shapeNum++));
+	shapes.emplace_back(std::make_unique<Triangle>(Float2(500, 500), Float2(-120,75), 30, shapeNum++));
+	shapes.emplace_back(std::make_unique<Triangle>(Float2(500, 500), Float2(120, 75), 30, shapeNum++));
+	shapes.emplace_back(std::make_unique<Triangle>(Float2(500, 500), Float2(50, 50), 30, shapeNum++));
+	shapes.emplace_back(std::make_unique<Star>(Float2(475, 475),Float2(100,100) ,25,shapeNum++));
+	shapes.emplace_back(std::make_unique<Heart>(Float2(475, 475), Float2(-100, 50), 25, shapeNum++));
 
 	std::chrono::system_clock::time_point  start, end;
 	end = std::chrono::system_clock::now();
@@ -68,9 +68,11 @@ int WINAPI WinMain(_In_ HINSTANCE hInstance, _In_opt_  HINSTANCE hPrevInstance, 
 		for (auto& shape : shapes)
 		{
 			shape->Update(del,shapes);
-			//shape->HitDraw();
 		}
 
+		for (auto& shape : shapes) {
+			shape->HitDraw();
+		}
 		DrawLine(0-1,400-1,800-1,400-1,0xff0000);
 		DrawLine(400-1,0-1, 400-1, 800-1, 0xff0000);
 		
