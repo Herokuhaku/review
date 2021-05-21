@@ -33,14 +33,16 @@ int WINAPI WinMain(_In_ HINSTANCE hInstance, _In_opt_  HINSTANCE hPrevInstance, 
 	// SquareÇÃDrawÇï`âÊÇ∑ÇÈ
 	// squareÇmake_uniqueÇ≈çÏÇÈ
 	ShapeVec shapes;
-	shapes.emplace_back(std::make_unique<Square>(Float2(375,375),Float2(100,50), Float2(50, 50),shapeNum++));
-	shapes.emplace_back(std::make_unique<Square>(Float2(475,475),Float2(50,-100), Float2(50, 50), shapeNum++));
-	shapes.emplace_back(std::make_unique<Circle>(Float2(475, 475),Float2(-75,100),25, shapeNum++));
-	shapes.emplace_back(std::make_unique<Triangle>(Float2(500, 500), Float2(-120,75), 30, shapeNum++));
-	shapes.emplace_back(std::make_unique<Triangle>(Float2(500, 500), Float2(120, 75), 30, shapeNum++));
-	shapes.emplace_back(std::make_unique<Triangle>(Float2(500, 500), Float2(50, 50), 30, shapeNum++));
-	shapes.emplace_back(std::make_unique<Star>(Float2(475, 475),Float2(100,100) ,25,shapeNum++));
-	shapes.emplace_back(std::make_unique<Heart>(Float2(475, 475), Float2(-100, 50), 25, shapeNum++));
+	shapes.emplace_back(std::make_shared<Square>(Float2(375,375),Float2(100,50), Float2(50, 50),shapeNum++));
+	shapes.emplace_back(std::make_shared<Square>(Float2(475,475),Float2(50,-100), Float2(50, 50), shapeNum++));
+	shapes.emplace_back(std::make_shared<Circle>(Float2(475, 475),Float2(-75,100),25, shapeNum++));
+	shapes.emplace_back(std::make_shared<Triangle>(Float2(500, 500), Float2(-120,75), 30, shapeNum++));
+	shapes.emplace_back(std::make_shared<Triangle>(Float2(300, 200), Float2(50, -75), 30, shapeNum++));
+	shapes.emplace_back(std::make_shared<Triangle>(Float2(200, 400), Float2(80, 25), 30, shapeNum++));
+	shapes.emplace_back(std::make_shared<Star>(Float2(205, 105),Float2(-100,100) ,25,shapeNum++));
+	shapes.emplace_back(std::make_shared<Star>(Float2(305, 55), Float2(87, -35), 25, shapeNum++));
+	shapes.emplace_back(std::make_shared<Star>(Float2(705, 305), Float2(-55,170), 25, shapeNum++));
+	shapes.emplace_back(std::make_shared<Heart>(Float2(475, 475), Float2(-100, 50), 25, shapeNum++));
 
 	std::chrono::system_clock::time_point  start, end;
 	end = std::chrono::system_clock::now();

@@ -13,8 +13,9 @@ void Shape::Draw(Float2 offset, float num)
 {
 }
 
-bool Shape::HitCheck(ShapeVec& shapes)
+std::pair<SharedShape&,bool> Shape::HitCheck(ShapeVec& shapes)
 {
+	SharedShape hitshape;
 	screenhit_ = false;
 	otherflag = false;
 	bool rtnflag_ = false;
@@ -35,6 +36,7 @@ bool Shape::HitCheck(ShapeVec& shapes)
 					}
 					if (flag && !hitnow_)
 					{
+						hitshape = shape;
 						hitnow_ = true;
 						rtnflag_ = true;
 					}
@@ -90,9 +92,9 @@ bool Shape::HitCheck(ShapeVec& shapes)
 	// “–‚½‚Á‚Ä‚¢‚é”»’è‚Å‚Í‚ ‚é‚¯‚Ç1‚Â‚É‚à“–‚½‚Á‚Ä‚¢‚È‚¢ê‡‚É
 	// “–‚½‚Á‚Ä‚¢‚È‚¢”»’è‚É–ß‚·
 	if (hitnow_ && !otherflag) {
-	hitnow_ = false;
+		hitnow_ = false;
 	}
-	return rtnflag_;
+	return std::pair<SharedShape&,bool>(hitshape,rtnflag_);
 }
 
 void Shape::HitDraw(void)
@@ -106,6 +108,11 @@ void Shape::HitDraw(void)
 void Shape::ClearHitCheck(void)
 {
 	hit_.clear();
+}
+
+void Shape::SetRotaFlag_()
+{
+	rotaflag_ = !rotaflag_;
 }
 
 ShapeType Shape::GetType(void)

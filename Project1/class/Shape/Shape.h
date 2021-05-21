@@ -10,7 +10,7 @@
 class Shape;
 using UniqueShape = std::unique_ptr<Shape>;
 using SharedShape = std::shared_ptr<Shape>;
-using ShapeVec = std::vector<UniqueShape>;
+using ShapeVec = std::vector<SharedShape>;
 using HitPair = std::pair<Float2, int>;
 using HitPairVec = std::vector<HitPair>;
 using HitCircle = std::map<int,HitPairVec>;
@@ -52,11 +52,13 @@ public:
 	virtual int GetMynum(void);
 
 	// “–‚½‚è”»’è
-	bool HitCheck(ShapeVec& shapes);
+	std::pair<SharedShape&,bool> HitCheck(ShapeVec& shapes);
 	// ‰~‚Ì”»’è‹Šo‰»
 	void HitDraw(void);
 	// “–‚½‚è”»’è‚Ìíœ
 	void ClearHitCheck(void);
+
+	void SetRotaFlag_();
 private:
 	// ‰Šú’lİ’è
 	virtual void Init(void);
@@ -74,4 +76,8 @@ protected:
 	bool otherflag;
 	bool screenhit_;
 	bool allscreenhit_;
+
+	//
+	double rota_;
+	bool rotaflag_;
 };

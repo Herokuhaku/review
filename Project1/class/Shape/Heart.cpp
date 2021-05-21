@@ -16,8 +16,7 @@ Heart::~Heart()
 void Heart::Update(float delta, ShapeVec& shapes)
 {
 	pos_ += (vec_ * delta);
-
-
+	HitCheck(shapes);
 }
 
 void Heart::Draw(void)
@@ -33,13 +32,14 @@ void Heart::Draw(void)
 
 	DrawRotaGraph(pos_.x, pos_.y, 1.0f, 0,heartsave_, true);
 	DrawCircle(pos_.x , pos_.y,2,0xff0000);
-
+	hit_.emplace_back(HitPair(Float2(pos_.x, pos_.y), size_));
 }
 
 void Heart::Draw(float num)
 {
 	DrawRotaGraph(pos_.x, pos_.y, 1.0f * num, 0, heartsave_, true);
 	DrawCircle(pos_.x, pos_.y, 2, 0xff0000);
+	hit_.emplace_back(HitPair(Float2(pos_.x, pos_.y), size_));
 }
 
 void Heart::Init(void)

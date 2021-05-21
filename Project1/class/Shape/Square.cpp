@@ -56,7 +56,7 @@ void Square::Update(float delta, ShapeVec& shapes)
 	//reverse_.first ? pos_.x += delta * 100:pos_.x -= delta * 100;
 	pos_ += (vec_ * delta);
 
-	if (HitCheck(shapes))
+	if (HitCheck(shapes).second)
 	{
 		color_ = rand() % 0x777777 + 0x123456;
 	}

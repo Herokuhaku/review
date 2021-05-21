@@ -18,9 +18,16 @@ Star::~Star()
 void Star::Update(float delta, ShapeVec& shapes)
 {
     pos_ += (vec_ * delta);
-    if (HitCheck(shapes))
+    std::pair<SharedShape&, bool> hitchecktmp = HitCheck(shapes);
+    if (hitchecktmp.second)
     {
-        color_ = rand() % 0x777777 + 0x123456;
+        if (hitchecktmp.first != nullptr && hitchecktmp.first->GetType() == ShapeType::Triangle) {
+            hitchecktmp.first->SetRotaFlag_();
+        }
+        rotaflag_ = !rotaflag_;
+    }
+    if (rotaflag_) {
+        rota_++;
     }
 }
 
@@ -31,9 +38,9 @@ void Star::Draw(void)
         point[i] = Float2(pos_.x, pos_.y - size_);
     }
     
-    for (int i = 1; i < 5; i++)
+    for (int i = 0; i < 5; i++)
     {
-        angle_ = (i* static_cast<double>(degree_)) * 3.141592 / 180;
+        angle_ = (i* static_cast<double>(degree_)+rota_) * 3.141592 / 180;
 
         point[i] -= pos_;
 
@@ -89,4 +96,5 @@ void Star::Init(void)
     stype_ = ShapeType::Star;
     degree_ = 72;
     point.resize(5);
+    rota_ = 0;
 }

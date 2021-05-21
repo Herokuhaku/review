@@ -16,7 +16,7 @@ void Circle::Update(float delta, ShapeVec& shapes)
 {
 	pos_ += (vec_ * delta);
 
-	if (HitCheck(shapes))
+	if (HitCheck(shapes).second)
 	{
 		color_ = rand() % 0x777777 + 0x777777;
 		//shapes.emplace_back(std::make_unique<Square>(Float2(475, 475), Float2(50, 50), Allhit_,*allnumber_++,*allnumber_));
