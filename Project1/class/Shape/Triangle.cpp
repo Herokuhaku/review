@@ -22,9 +22,9 @@ void Triangle::Update(float delta, ShapeVec& shapes)
     {
         
     }
-    if (rotaflag_)
+    if (change_["ROTA"].second)
     {
-        rota_--;
+        change_["ROTA"].first--;
     }
 }
 
@@ -37,7 +37,7 @@ void Triangle::Draw(void)
     }
     for (int i = 0; i < 3; i++)
     {
-        angle_ = (i * static_cast<double>(120.0) + rota_) * 3.141592 / 180;
+        angle_ = (i * static_cast<double>(120.0) + change_["ROTA"].first) * 3.141592 / 180;
 
         point[i] -= pos_;
 
@@ -67,7 +67,7 @@ void Triangle::Draw(float num)
     }
     for (int i = 0; i < 3; i++)
     {
-        angle_ = (i * static_cast<double>(120.0) + rota_) * 3.141592 / 180;
+        angle_ = (i * static_cast<double>(120.0) + change_["ROTA"].first) * 3.141592 / 180;
 
         point[i] -= pos_;
 
@@ -89,5 +89,4 @@ void Triangle::Init(void)
 {
     stype_ = ShapeType::Triangle;
     point.resize(3);
-    rota_ = 0;
 }

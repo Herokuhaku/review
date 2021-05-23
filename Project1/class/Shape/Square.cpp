@@ -39,6 +39,7 @@ void Square::Init(void)
 		reverse_.second = true;
 		color_ = 0xffffff;
 	}
+	smoothsize_ = 1;
 }
 Square::Square(Float2&& pos, Float2&& vec, Float2&& size,int mynum):Shape(std::move(pos), vec, mynum)
 {
@@ -58,6 +59,9 @@ void Square::Update(float delta, ShapeVec& shapes)
 
 	if (HitCheck(shapes).second)
 	{
+		smooth_ = std::pair<double,bool>(change_["MAG"].first,true);
+		change_["MAG"].second = true;
 		color_ = rand() % 0x777777 + 0x123456;
 	}
+	Shape::ChangeDrawSize(plusmag_);
 }

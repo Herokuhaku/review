@@ -64,7 +64,13 @@ int WINAPI WinMain(_In_ HINSTANCE hInstance, _In_opt_  HINSTANCE hPrevInstance, 
 		// æ‚ÉDraw‚ðì‚Á‚Ä“–‚½‚è”»’è‚ðì‚é
 		for (auto& shape : shapes)
 		{
-			shape->Draw();
+			auto ch = shape->GetChange("MAG");
+			if (!ch.second) {
+				shape->Draw();
+			}
+			else {
+				shape->Draw(ch.first);
+			}
 		}
 		// Update
 		for (auto& shape : shapes)

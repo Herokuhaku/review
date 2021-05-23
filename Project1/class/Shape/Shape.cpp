@@ -110,9 +110,25 @@ void Shape::ClearHitCheck(void)
 	hit_.clear();
 }
 
-void Shape::SetRotaFlag_()
+void Shape::ChangeRotaFlag()
 {
-	rotaflag_ = !rotaflag_;
+	change_["ROTA"].second = !change_["ROTA"].second;
+}
+
+void Shape::ChangeDrawSizeFlag()
+{
+}
+
+std::pair<double, bool> Shape::GetChange(std::string str)
+{
+	return change_[str];
+}
+
+void Shape::ChangeDrawSize(double plus)
+{
+	if (change_["MAG"].first < maxmag_ && (change_["MAG"].first - smooth_.first) <= smoothsize_) {
+		change_["MAG"].first += plus;
+	}
 }
 
 ShapeType Shape::GetType(void)
@@ -136,4 +152,9 @@ void Shape::Init(void)
 	color_ = (rand ()*mynumber_) % 0xffffff;
 	hitnow_ = false;
 	screenhit_ = false;
+	maxmag_ = 3.0f;
+	plusmag_ = 0.005;
+
+	change_.try_emplace("ROTA",0.0f,false);
+	change_.try_emplace("MAG",1.0f, false);
 }

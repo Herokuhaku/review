@@ -57,8 +57,15 @@ public:
 	void HitDraw(void);
 	// 当たり判定の削除
 	void ClearHitCheck(void);
+	// 回転フラグを反転させる
+	void ChangeRotaFlag();
+	// Drwaの拡大率を変えるフラグ
+	void ChangeDrawSizeFlag();
 
-	void SetRotaFlag_();
+	// Changeの中身を呼ぶ
+	std::pair<double, bool> GetChange(std::string str);
+
+	void ChangeDrawSize(double plus);
 private:
 	// 初期値設定
 	virtual void Init(void);
@@ -72,12 +79,17 @@ protected:
 	ShapeType stype_;
 	int color_;
 	std::function<bool(UniqueShape& shape1, UniqueShape& shape2)> hitCheckShapes_;
+	
+	// 当たり判定
 	bool hitnow_;
 	bool otherflag;
 	bool screenhit_;
 	bool allscreenhit_;
 
-	//
-	double rota_;
-	bool rotaflag_;
+	// 拡大
+	std::map<std::string, std::pair<double, bool>> change_;
+	std::pair<double, bool> smooth_;
+	int smoothsize_;
+	int maxmag_;
+	double plusmag_;
 };
