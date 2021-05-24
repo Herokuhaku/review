@@ -18,7 +18,6 @@ void Circle::Update(float delta, ShapeVec& shapes)
 
 	if (HitCheck(shapes).second)
 	{
-		color_ = rand() % 0x777777 + 0x777777;
 		//shapes.emplace_back(std::make_unique<Square>(Float2(475, 475), Float2(50, 50), Allhit_,*allnumber_++,*allnumber_));
 	}
 
@@ -27,12 +26,14 @@ void Circle::Update(float delta, ShapeVec& shapes)
 void Circle::Draw(void)
 {
 	DrawCircle(pos_.x,pos_.y,size_,color_);
+	hit_.clear();
 	hit_.emplace_back(HitPair(Float2(pos_.x,pos_.y),size_));
 }
 
 void Circle::Draw(float num)
 {
-	DrawCircle(pos_.x, pos_.y,size_ * num, color_);
+	DrawCircle(pos_.x, pos_.y,size_ * num, color_);	
+	hit_.clear();
 	hit_.emplace_back(HitPair(Float2(pos_.x, pos_.y), size_*num));
 }
 

@@ -28,6 +28,7 @@ enum class ShapeType {
 class Shape
 {
 public:
+	Shape();
 	Shape(Float2&& pos,Float2& vec,int num);
 	~Shape();
 
@@ -65,7 +66,10 @@ public:
 	// Changeの中身を呼ぶ
 	std::pair<double, bool> GetChange(std::string str);
 
+	// Drawのサイズを変える
 	void ChangeDrawSize(double plus);
+	// Drawの色を変える
+	void ChangeColor(void);
 private:
 	// 初期値設定
 	virtual void Init(void);

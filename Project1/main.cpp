@@ -19,6 +19,7 @@ bool SysInit()
 	if (DxLib_Init() == -1){
 		return false;
 	}
+	srand((unsigned int)time(NULL));
 	return true;
 }
 
@@ -48,6 +49,7 @@ int WINAPI WinMain(_In_ HINSTANCE hInstance, _In_opt_  HINSTANCE hPrevInstance, 
 	end = std::chrono::system_clock::now();
 	start = std::chrono::system_clock::now();
 
+	
 	//auto del = std::remove_if(shapes.begin(), shapes.end(), [](UniqueShape& shape) {
 	//	shape->Draw();0
 	//	return true;
@@ -79,17 +81,12 @@ int WINAPI WinMain(_In_ HINSTANCE hInstance, _In_opt_  HINSTANCE hPrevInstance, 
 		}
 
 		for (auto& shape : shapes) {
-			shape->HitDraw();
+			//shape->HitDraw();
 		}
 		DrawLine(0-1,400-1,800-1,400-1,0xff0000);
 		DrawLine(400-1,0-1, 400-1, 800-1, 0xff0000);
 		
 		ScreenFlip();
-		// “–‚½‚è”»’è‚ÌƒŠƒZƒbƒg
-		for (auto& shape : shapes)
-		{
-			shape->ClearHitCheck();
-		}
 	}
 
 	return 1;

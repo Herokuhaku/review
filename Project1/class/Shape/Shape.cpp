@@ -1,6 +1,11 @@
 #include <DxLib.h>
 #include "Shape.h"
 
+Shape::Shape()
+{
+	Init();
+}
+
 Shape::Shape(Float2&& pos, Float2& vec, int num):pos_(pos),mynumber_(num),vec_(vec)
 {
 	Init();
@@ -129,6 +134,11 @@ void Shape::ChangeDrawSize(double plus)
 	if (change_["MAG"].first < maxmag_ && (change_["MAG"].first - smooth_.first) <= smoothsize_) {
 		change_["MAG"].first += plus;
 	}
+}
+
+void Shape::ChangeColor(void)
+{
+	color_ = rand() % 0x777777 + 0x123456;
 }
 
 ShapeType Shape::GetType(void)

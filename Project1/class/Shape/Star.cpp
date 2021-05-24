@@ -18,7 +18,7 @@ Star::~Star()
 void Star::Update(float delta, ShapeVec& shapes)
 {
     pos_ += (vec_ * delta);
-    std::pair<SharedShape&, bool> hitchecktmp = HitCheck(shapes);
+    std::pair<SharedShape, bool> hitchecktmp = HitCheck(shapes);
     if (hitchecktmp.second)
     {
         // ŽOŠp‚¾‚Á‚½‚ç‘ŠŽè‚ð‰ñ“]‚³‚¹‚é
@@ -58,13 +58,14 @@ void Star::Draw(void)
         point[i] = pos_ + n;
     }
     if (point.size() >= 5) {
-        DrawLine(point[0].x, point[0].y, point[2].x, point[2].y, 0xffffff, true);
-        DrawLine(point[2].x, point[2].y, point[4].x, point[4].y, 0xffffff, true);
-        DrawLine(point[4].x, point[4].y, point[1].x, point[1].y, 0xffffff, true);
-        DrawLine(point[1].x, point[1].y, point[3].x, point[3].y, 0xffffff, true);
-        DrawLine(point[3].x, point[3].y, point[0].x, point[0].y, 0xffffff, true);
+        DrawLine(point[0].x, point[0].y, point[2].x, point[2].y,color_, true);
+        DrawLine(point[2].x, point[2].y, point[4].x, point[4].y,color_, true);
+        DrawLine(point[4].x, point[4].y, point[1].x, point[1].y,color_, true);
+        DrawLine(point[1].x, point[1].y, point[3].x, point[3].y,color_, true);
+        DrawLine(point[3].x, point[3].y, point[0].x, point[0].y,color_, true);
     }
     DrawCircle(pos_.x,pos_.y,2,0xffffff);
+    hit_.clear();
     hit_.emplace_back(Float2(pos_.x,pos_.y),size_);
 }
 
@@ -88,13 +89,14 @@ void Star::Draw(float num)
         point[i] = pos_ + n;
     }
     if (point.size() >= 5) {
-        DrawLine(point[0].x, point[0].y, point[2].x, point[2].y, 0xffffff, true);
-        DrawLine(point[2].x, point[2].y, point[4].x, point[4].y, 0xffffff, true);
-        DrawLine(point[4].x, point[4].y, point[1].x, point[1].y, 0xffffff, true);
-        DrawLine(point[1].x, point[1].y, point[3].x, point[3].y, 0xffffff, true);
-        DrawLine(point[3].x, point[3].y, point[0].x, point[0].y, 0xffffff, true);
+        DrawLine(point[0].x, point[0].y, point[2].x, point[2].y, color_, true);
+        DrawLine(point[2].x, point[2].y, point[4].x, point[4].y, color_, true);
+        DrawLine(point[4].x, point[4].y, point[1].x, point[1].y, color_, true);
+        DrawLine(point[1].x, point[1].y, point[3].x, point[3].y, color_, true);
+        DrawLine(point[3].x, point[3].y, point[0].x, point[0].y, color_, true);
     }
     DrawCircle(pos_.x, pos_.y, 2, 0xffffff);
+    hit_.clear();
     hit_.emplace_back(Float2(pos_.x, pos_.y), size_*num);
 }
 

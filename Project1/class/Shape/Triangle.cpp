@@ -47,9 +47,9 @@ void Triangle::Draw(void)
 
         point[i] = pos_ + n;
     }
-    DrawTriangle(point[0].x,point[0].y,point[1].x,point[1].y,point[2].x,point[2].y,0xff00ff,false);
+    DrawTriangle(point[0].x,point[0].y,point[1].x,point[1].y,point[2].x,point[2].y,color_,false);
     DrawCircle(pos_.x, pos_.y,2, 0xffffff);
-
+    hit_.clear();
     hit_.emplace_back(Float2(pos_.x - (pos_.x - point[0].x)/2,pos_.y - (pos_.y - point[0].y) / 2), size_ / 2.75);
     hit_.emplace_back(Float2(pos_.x - (pos_.x - point[1].x) / 2, pos_.y - (pos_.y - point[1].y) / 2), size_ / 2.75);
     hit_.emplace_back(Float2(pos_.x - (pos_.x - point[2].x) / 2, pos_.y - (pos_.y - point[2].y) / 2), size_ / 2.75);
@@ -77,9 +77,9 @@ void Triangle::Draw(float num)
 
         point[i] = pos_ + n;
     }
-    DrawTriangle(point[0].x, point[0].y, point[1].x, point[1].y, point[2].x, point[2].y, 0xff00ff, false);
+    DrawTriangle(point[0].x, point[0].y, point[1].x, point[1].y, point[2].x, point[2].y,color_, false);
 
-
+    hit_.clear();
     hit_.emplace_back(Float2(pos_.x + (pos_.x - point[0].x) / 2, pos_.y - (pos_.y - point[0].y) / 2), (size_*num) / 3);
     hit_.emplace_back(Float2(pos_.x + (pos_.x - point[1].x) / 2, pos_.y - (pos_.y - point[1].y) / 2), (size_ * num) / 3);
     hit_.emplace_back(Float2(pos_.x + (pos_.x - point[2].x) / 2, pos_.y - (pos_.y - point[2].y) / 2), (size_ * num) / 3);
