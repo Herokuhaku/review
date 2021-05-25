@@ -5,10 +5,10 @@ class Star :
 	public Shape
 {
 public:
-	Star(Float2&& pos, Float2&& vec, int&& size, int mynum);
+	Star(Parameters param, int mynum);
 	~Star();
 
-	void Update(float delta, ShapeVec& shapes)override;
+	void Update(float delta, ShapeVec& shapes, VecInt& vecint, ParamVec& pvec)override;
 
 	// DrawBox‚ðŒÄ‚Ô
 	void Draw(void)override;
@@ -19,7 +19,6 @@ public:
 	void Init(void)override;
 private:
 	std::vector<Float2> point;
-	int size_;
 	int degree_;
 	double angle_;
 };

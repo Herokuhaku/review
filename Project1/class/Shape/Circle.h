@@ -5,9 +5,9 @@ class Circle :
 	public Shape
 {
 public:
-	Circle(Float2&& pos, Float2&& vec, int&& size, int mynum);
+	Circle(Parameters param, int mynum);
 	~Circle();
-	void Update(float delta,ShapeVec& shapes)override;
+	void Update(float delta,ShapeVec& shapes, VecInt& vecint,ParamVec& pvec)override;
 	// DrawCircle‚ðŒÄ‚Ô
 	void Draw(void)override;
 
@@ -16,6 +16,5 @@ public:
 
 	void Init(void)override;
 private:
-	int size_;
 };
 

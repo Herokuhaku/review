@@ -6,10 +6,10 @@ class Heart :
 	public Shape
 {
 public:
-	Heart(Float2&& pos, Float2&& vec, int&& size, int mynum);
+	Heart(Parameters param, int mynum);
 	~Heart();
 	// Update
-	void Update(float delta, ShapeVec& shapes)override;
+	void Update(float delta, ShapeVec& shapes, VecInt& vecint, ParamVec& pvec)override;
 	// DrawBox‚ðŒÄ‚Ô
 	void Draw(void)override;
 
@@ -20,7 +20,6 @@ private:
 	std::vector<Float2> point;
 	float height_;
 	double angle_;
-	float size_;
 
 	bool reverse_;
 

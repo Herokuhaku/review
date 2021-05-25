@@ -3,17 +3,15 @@
 #include <math.h>
 #include "Heart.h"
 
-Heart::Heart(Float2&& pos, Float2&& vec, int&& size, int mynum) :Shape(std::move(pos), vec, mynum)
+Heart::Heart(Parameters param, int mynum) :Shape(param,mynum)
 {
-	pos_ = pos;
-	size_ = size;
 	Init();
 }
 Heart::~Heart()
 {
 }
 
-void Heart::Update(float delta, ShapeVec& shapes)
+void Heart::Update(float delta, ShapeVec& shapes, VecInt& vecint, ParamVec& pvec)
 {
 	pos_ += (vec_ * delta);
 	HitCheck(shapes);
@@ -33,7 +31,7 @@ void Heart::Draw(void)
 	DrawRotaGraph(pos_.x, pos_.y, 1.0f, 0,heartsave_, true);
 	DrawCircle(pos_.x , pos_.y,2,0xff0000);
 	hit_.clear();
-	hit_.emplace_back(HitPair(Float2(pos_.x, pos_.y), size_));
+	hit_.emplace_back(HitPair(Float2(pos_.x, pos_.y), size_.x));
 }
 
 void Heart::Draw(float num)
@@ -41,20 +39,20 @@ void Heart::Draw(float num)
 	DrawRotaGraph(pos_.x, pos_.y, 1.0f * num, 0, heartsave_, true);
 	DrawCircle(pos_.x, pos_.y, 2, 0xff0000);
 	hit_.clear();
-	hit_.emplace_back(HitPair(Float2(pos_.x, pos_.y), size_));
+	hit_.emplace_back(HitPair(Float2(pos_.x, pos_.y), size_.x));
 }
 
 void Heart::Init(void)
 {
 	stype_ = ShapeType::Heart;
-	heartsave_ = MakeScreen(size_ * 4,size_ * 4,true);
+	heartsave_ = MakeScreen(size_.x * 4,size_.x * 4,true);
 	reverse_ = false;
 
 	for (double x = -1.6; x < 1.6; x += 0.01) {
 		for (double y = -1.6; y < 1.6; y += 0.01) {
 			double Pow = pow((4 - x * x),0.1);
 			double Y = (sqrt(cos(1 * x)) * cos(100 * x) + sqrt(abs(x)) - 0.4) *  Pow;
-			point.emplace_back(Float2((x *size_) + size_*2,-(Y * size_) + size_*2));
+			point.emplace_back(Float2((x *size_.x) + size_.x*2,-(Y * size_.x) + size_.x*2));
 		}
 	}
 	SetDrawScreen(heartsave_);

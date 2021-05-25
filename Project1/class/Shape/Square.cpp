@@ -43,10 +43,8 @@ void Square::Init(void)
 	}
 	smoothsize_ = 1;
 }
-Square::Square(Float2&& pos, Float2&& vec, Float2&& size,int mynum):Shape(std::move(pos), vec, mynum)
+Square::Square(Parameters param, int mynum):Shape(param, mynum)
 {
-	pos_ = pos;
-	size_ = size;
 	Init();
 }
 
@@ -54,7 +52,7 @@ Square::~Square()
 {
 }
 
-void Square::Update(float delta, ShapeVec& shapes)
+void Square::Update(float delta, ShapeVec& shapes, VecInt& vecint, ParamVec& pvec)
 {
 	pos_ += (vec_ * delta);
 	std::pair<SharedShape, bool> hitchecktmp = HitCheck(shapes);
@@ -63,7 +61,8 @@ void Square::Update(float delta, ShapeVec& shapes)
 		//©•ª‚Ìˆ—
 		smooth_ = std::make_pair(change_["MAG"].first,true);
 		//smooth_ = std::pair<double, bool>(change_["MAG"].first, true);
-		change_["MAG"].second = true;
+		change_["MAG"].second = true;	
+		hitchecktmp.first->ChangeColor();
 		// ©•ª‚¶‚á‚È‚©‚Á‚½‚çF‚ğ•Ï‚¦‚é
 		if (hitchecktmp.first->GetMynum() != mynumber_)
 		{

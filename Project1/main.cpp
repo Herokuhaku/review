@@ -31,30 +31,28 @@ int WINAPI WinMain(_In_ HINSTANCE hInstance, _In_opt_  HINSTANCE hPrevInstance, 
 
 	HitCircle hitcircle_;
 	int shapeNum = 0;
-	// SquareのDrawを描画する
-	// squareをmake_uniqueで作る
+
+	// Shape
 	ShapeVec shapes;
-	shapes.emplace_back(std::make_shared<Square>(Float2(375,375),Float2(100,50), Float2(50, 50),shapeNum++));
-	shapes.emplace_back(std::make_shared<Square>(Float2(475,475),Float2(50,-100), Float2(50, 50), shapeNum++));
-	shapes.emplace_back(std::make_shared<Circle>(Float2(475, 475),Float2(-75,100),25, shapeNum++));
-	shapes.emplace_back(std::make_shared<Triangle>(Float2(500, 500), Float2(-120,75), 30, shapeNum++));
-	shapes.emplace_back(std::make_shared<Triangle>(Float2(300, 200), Float2(50, -75), 30, shapeNum++));
-	shapes.emplace_back(std::make_shared<Triangle>(Float2(200, 400), Float2(80, 25), 30, shapeNum++));
-	shapes.emplace_back(std::make_shared<Star>(Float2(205, 105),Float2(-100,100) ,25,shapeNum++));
-	shapes.emplace_back(std::make_shared<Star>(Float2(305, 55), Float2(87, -35), 25, shapeNum++));
-	shapes.emplace_back(std::make_shared<Star>(Float2(705, 305), Float2(-55,170), 25, shapeNum++));
-	shapes.emplace_back(std::make_shared<Heart>(Float2(475, 475), Float2(-100, 50), 25, shapeNum++));
+	shapes.emplace_back(std::make_shared<Square>(Parameters(Float2(375,375),Float2(100,50), Float2(50, 50)),shapeNum++));
+	shapes.emplace_back(std::make_shared<Square>(Parameters(Float2(475,475),Float2(50,-100), Float2(50, 50)), shapeNum++));
+	shapes.emplace_back(std::make_shared<Circle>(Parameters(Float2(475, 475),Float2(-75,100),Float2(25,0)), shapeNum++));
+	shapes.emplace_back(std::make_shared<Triangle>(Parameters(Float2(500, 500), Float2(-120,75), Float2(30, 0)), shapeNum++));
+	shapes.emplace_back(std::make_shared<Triangle>(Parameters(Float2(300, 200), Float2(50, -75), Float2(30, 0)), shapeNum++));
+	shapes.emplace_back(std::make_shared<Triangle>(Parameters(Float2(200, 400), Float2(80, 25), Float2(30, 0)), shapeNum++));
+	shapes.emplace_back(std::make_shared<Star>(Parameters(Float2(205, 105),Float2(-100,100) , Float2(25, 0)),shapeNum++));
+	shapes.emplace_back(std::make_shared<Star>(Parameters(Float2(305, 55), Float2(87, -35), Float2(25, 0)), shapeNum++));
+	shapes.emplace_back(std::make_shared<Star>(Parameters(Float2(705, 305), Float2(-55,170), Float2(25, 0)), shapeNum++));
+	shapes.emplace_back(std::make_shared<Heart>(Parameters(Float2(475, 475), Float2(-100, 50), Float2(25, 0)), shapeNum++));
 
 	std::chrono::system_clock::time_point  start, end;
 	end = std::chrono::system_clock::now();
 	start = std::chrono::system_clock::now();
+	// 消すshapeの一時保存リスト
+	VecInt eraseno;
+	// 追加するshapeのパラメータリスト(vector)
+	ParamVec paramvec;
 
-	
-	//auto del = std::remove_if(shapes.begin(), shapes.end(), [](UniqueShape& shape) {
-	//	shape->Draw();0
-	//	return true;
-	//	});
-	//shapes.erase(del,shapes.end());
 	while (!ProcessMessage() && !CheckHitKey(KEY_INPUT_ESCAPE))
 	{
 		end = std::chrono::system_clock::now();
@@ -77,17 +75,36 @@ int WINAPI WinMain(_In_ HINSTANCE hInstance, _In_opt_  HINSTANCE hPrevInstance, 
 		// Update
 		for (auto& shape : shapes)
 		{
-			shape->Update(del,shapes);
+			shape->Update(del,shapes,eraseno,paramvec);
 		}
 
-		for (auto& shape : shapes) {
-			//shape->HitDraw();
+		// 削除処理
+		if (eraseno.size() >= 1) {
+			auto deleter = std::remove_if(shapes.begin(), shapes.end(), [&](SharedShape& shape) {
+				for (auto erase : eraseno) {
+					if (shape->GetMynum() == erase) {
+						return true;
+					}
+				}
+				return false;
+				});
+			shapes.erase(deleter, shapes.end());
+			eraseno.clear();
+		}
+		 //追加処理
+		if (paramvec.size() >= 1) {
+			for (auto& param : paramvec) {
+				shapes.emplace_back(std::make_shared<Circle>(param,shapeNum++));
+			}
+			paramvec.clear();
 		}
 		DrawLine(0-1,400-1,800-1,400-1,0xff0000);
 		DrawLine(400-1,0-1, 400-1, 800-1, 0xff0000);
 		
 		ScreenFlip();
 	}
-
+	if (shapes.size() >= 1) {
+		shapes.clear();
+	}
 	return 1;
 }

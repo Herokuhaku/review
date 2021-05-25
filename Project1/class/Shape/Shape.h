@@ -14,7 +14,7 @@ using ShapeVec = std::vector<SharedShape>;
 using HitPair = std::pair<Float2, int>;
 using HitPairVec = std::vector<HitPair>;
 using HitCircle = std::map<int,HitPairVec>;
-
+using VecInt = std::vector<int>;
 enum class ShapeType {
 	NON,
 	Square,
@@ -25,15 +25,35 @@ enum class ShapeType {
 	MAX
 };
 
+struct Parameters {
+	Parameters() {
+		p = Float2(0, 0);
+		v = Float2(0, 0);
+		s = Float2(0, 0);
+	};
+	Parameters(Float2 p,Float2 v,Float2 s) {
+		Parameters::p = p;
+		Parameters::v = v;
+		Parameters::s = s;
+	};
+	// pos
+	Float2 p;
+	// vec
+	Float2 v;
+	// size
+	Float2 s;
+};
+
+using ParamVec = std::vector<Parameters>;
 class Shape
 {
 public:
 	Shape();
-	Shape(Float2&& pos,Float2& vec,int num);
+	Shape(Parameters parm,int num);
 	~Shape();
 
 	// Update
-	virtual void Update(float delta,ShapeVec& shapes) = 0;
+	virtual void Update(float delta,ShapeVec& shapes,VecInt& vecint,ParamVec& param) = 0;
 	
 	// Draw系
 	// Drawを呼ぶ
@@ -53,7 +73,7 @@ public:
 	virtual int GetMynum(void);
 
 	// 当たり判定
-	std::pair<SharedShape&,bool> HitCheck(ShapeVec& shapes);
+	std::pair<SharedShape&,bool> HitCheck(ShapeVec shapes);
 	// 円の判定視覚化
 	void HitDraw(void);
 	// 当たり判定の削除
@@ -70,6 +90,7 @@ public:
 	void ChangeDrawSize(double plus);
 	// Drawの色を変える
 	void ChangeColor(void);
+
 private:
 	// 初期値設定
 	virtual void Init(void);
@@ -77,6 +98,7 @@ private:
 protected:
 	// 座標
 	Float2 pos_;
+	Float2 size_;
 	Float2 vec_;
 	int mynumber_;
 	HitPairVec hit_;

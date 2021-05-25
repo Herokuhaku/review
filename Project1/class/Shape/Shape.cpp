@@ -6,7 +6,7 @@ Shape::Shape()
 	Init();
 }
 
-Shape::Shape(Float2&& pos, Float2& vec, int num):pos_(pos),mynumber_(num),vec_(vec)
+Shape::Shape(Parameters param, int num):pos_(param.p),mynumber_(num),vec_(param.v),size_(param.s)
 {
 	Init();
 }
@@ -18,7 +18,7 @@ void Shape::Draw(Float2 offset, float num)
 {
 }
 
-std::pair<SharedShape&,bool> Shape::HitCheck(ShapeVec& shapes)
+std::pair<SharedShape&,bool> Shape::HitCheck(ShapeVec shapes)
 {
 	SharedShape hitshape;
 	screenhit_ = false;
@@ -159,8 +159,8 @@ int Shape::GetMynum(void)
 void Shape::Init(void)
 {
 	stype_ = ShapeType::NON;
-	color_ = (rand ()*mynumber_) % 0xffffff;
-	hitnow_ = false;
+	color_ = (rand ()*mynumber_) % 0xffffff+0x654321;
+	hitnow_ = true;
 	screenhit_ = false;
 	maxmag_ = 3.0f;
 	plusmag_ = 0.005;

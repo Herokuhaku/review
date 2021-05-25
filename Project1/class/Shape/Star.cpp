@@ -4,10 +4,8 @@
 #include <vector>
 #include "Star.h"
 
-Star::Star(Float2&& pos, Float2&& vec, int&& size,int mynum):Shape(std::move(pos),vec, mynum)
+Star::Star(Parameters param, int mynum):Shape(param,mynum)
 {
-    pos_ = pos;
-    size_ = size;
     Init();
 }
 
@@ -15,7 +13,7 @@ Star::~Star()
 {
 }
 
-void Star::Update(float delta, ShapeVec& shapes)
+void Star::Update(float delta, ShapeVec& shapes, VecInt& vecint, ParamVec& pvec)
 {
     pos_ += (vec_ * delta);
     std::pair<SharedShape, bool> hitchecktmp = HitCheck(shapes);
@@ -42,7 +40,7 @@ void Star::Draw(void)
 {
     for (int i = 0; i < 5; i++)
     {
-        point[i] = Float2(pos_.x, pos_.y - size_);
+        point[i] = Float2(pos_.x, pos_.y - size_.x);
     }
     
     for (int i = 0; i < 5; i++)
@@ -66,14 +64,14 @@ void Star::Draw(void)
     }
     DrawCircle(pos_.x,pos_.y,2,0xffffff);
     hit_.clear();
-    hit_.emplace_back(Float2(pos_.x,pos_.y),size_);
+    hit_.emplace_back(Float2(pos_.x,pos_.y),size_.x);
 }
 
 void Star::Draw(float num)
 {
     for (int i = 0; i < 5; i++)
     {
-        point[i] = Float2(pos_.x, pos_.y - (size_*num));
+        point[i] = Float2(pos_.x, pos_.y - (size_.x*num));
     }
 
     for (int i = 1; i < 5; i++)
@@ -97,7 +95,7 @@ void Star::Draw(float num)
     }
     DrawCircle(pos_.x, pos_.y, 2, 0xffffff);
     hit_.clear();
-    hit_.emplace_back(Float2(pos_.x, pos_.y), size_*num);
+    hit_.emplace_back(Float2(pos_.x, pos_.y), size_.x*num);
 }
 
 void Star::Init(void)
