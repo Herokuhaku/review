@@ -78,6 +78,12 @@ int WINAPI WinMain(_In_ HINSTANCE hInstance, _In_opt_  HINSTANCE hPrevInstance, 
 			shape->Update(del,shapes,eraseno,paramvec);
 		}
 
+		// “–‚½‚è”»’è•`‰æ
+		for (auto& shape : shapes)
+		{
+			//shape->HitDraw();
+		}
+
 		// íœˆ—
 		if (eraseno.size() >= 1) {
 			auto deleter = std::remove_if(shapes.begin(), shapes.end(), [&](SharedShape& shape) {

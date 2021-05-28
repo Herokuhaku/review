@@ -14,7 +14,20 @@ Heart::~Heart()
 void Heart::Update(float delta, ShapeVec& shapes, VecInt& vecint, ParamVec& pvec)
 {
 	pos_ += (vec_ * delta);
-	HitCheck(shapes);
+	std::pair<SharedShape, bool> hitchecktmp = HitCheck(shapes);
+
+	if (hitchecktmp.first != nullptr && hitchecktmp.second)
+	{
+		//Ž©•ª‚Ìˆ—
+
+
+		// ‘ŠŽè‚Ö‚Ìˆ—
+		if (hitchecktmp.first->GetType() == ShapeType::Circle)
+		{
+			vecint.emplace_back(hitchecktmp.first->GetMynum());
+		}
+		//shapes.emplace_back(std::make_unique<Square>(Float2(475, 475), Float2(50, 50), Allhit_,*allnumber_++,*allnumber_));
+	}
 }
 
 void Heart::Draw(void)
@@ -32,6 +45,8 @@ void Heart::Draw(void)
 	DrawCircle(pos_.x , pos_.y,2,0xff0000);
 	hit_.clear();
 	hit_.emplace_back(HitPair(Float2(pos_.x, pos_.y), size_.x));
+	hit_.emplace_back(HitPair(Float2(pos_.x -(size_.x/1.3), pos_.y-size_.x/1.3), size_.x/1.5));
+	hit_.emplace_back(HitPair(Float2(pos_.x + (size_.x/1.3), pos_.y - size_.x/1.3), size_.x/1.5));
 }
 
 void Heart::Draw(float num)
@@ -40,6 +55,8 @@ void Heart::Draw(float num)
 	DrawCircle(pos_.x, pos_.y, 2, 0xff0000);
 	hit_.clear();
 	hit_.emplace_back(HitPair(Float2(pos_.x, pos_.y), size_.x));
+	hit_.emplace_back(HitPair(Float2(pos_.x - (size_.x / 1.3), pos_.y - size_.x / 1.3), size_.x / 1.5));
+	hit_.emplace_back(HitPair(Float2(pos_.x + (size_.x / 1.3), pos_.y - size_.x / 1.3), size_.x / 1.5));
 }
 
 void Heart::Init(void)

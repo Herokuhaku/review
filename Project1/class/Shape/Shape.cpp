@@ -141,9 +141,10 @@ void Shape::ChangeColor(void)
 	color_ = rand() % 0x777777 + 0x123456;
 }
 
-void Shape::ChangeVec(float speed, Float2 max = {300,300})
+void Shape::ChangeVec(float speed, Float2 max, Float2 min)
 {
-	if (abs(vec_.x * speed) <= max.x && abs(vec_.y * speed) <= max.y) {
+	if ((abs(vec_.x * speed) <= max.x && abs(vec_.y * speed) <= max.y) &&
+		(abs(vec_.x * speed) >= min.x && abs(vec_.y * speed) >= min.y)) {
 		vec_ = vec_ * speed;
 	}
 }

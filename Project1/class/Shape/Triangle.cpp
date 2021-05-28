@@ -15,11 +15,20 @@ Triangle::~Triangle()
 
 void Triangle::Update(float delta, ShapeVec& shapes, VecInt& vecint, ParamVec& pvec)
 {
-    pos_ += (vec_ * delta);
-    if (HitCheck(shapes).second)
+    pos_ += (vec_ * delta);	std::pair<SharedShape, bool> hitchecktmp = HitCheck(shapes);
+
+    if (hitchecktmp.first != nullptr && hitchecktmp.second)
     {
+        //©•ª‚Ìˆ—
         
+        if (hitchecktmp.first->GetMynum() != mynumber_)
+        {
+            hitchecktmp.first->ChangeVec(0.8, Float2(500, 500),Float2(0,0));
+        }
+        //shapes.emplace_back(std::make_unique<Square>(Float2(475, 475), Float2(50, 50), Allhit_,*allnumber_++,*allnumber_));
     }
+
+    // ‰ñ“]ˆ—
     if (change_["ROTA"].second)
     {
         change_["ROTA"].first--;

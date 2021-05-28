@@ -92,7 +92,7 @@ public:
 	void ChangeColor(void);
 
 	// スピードを上げる
-	void ChangeVec(float speed,Float2 max);
+	void ChangeVec(float speed,Float2 max = { 300,300 },Float2 min = { 20,20 });
 
 private:
 	// 初期値設定
