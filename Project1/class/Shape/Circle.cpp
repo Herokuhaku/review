@@ -32,7 +32,7 @@ void Circle::Update(float delta, ShapeVec& shapes, VecInt& vecint, ParamVec& pve
 		}
 		if (hitchecktmp.first->GetMynum() != mynumber_)
 		{
-			//hitchecktmp.first->ChangeColor();
+			hitchecktmp.first->ChangeVec(1.2, Float2(500,500));
 		}
 		//shapes.emplace_back(std::make_unique<Square>(Float2(475, 475), Float2(50, 50), Allhit_,*allnumber_++,*allnumber_));
 	}

@@ -67,8 +67,7 @@ void Square::Update(float delta, ShapeVec& shapes, VecInt& vecint, ParamVec& pve
 		if (hitchecktmp.first->GetMynum() != mynumber_)
 		{
 			hitchecktmp.first->ChangeColor();
-		}	
-
+		}
 	}
 	Shape::ChangeDrawSize(plusmag_);
 }

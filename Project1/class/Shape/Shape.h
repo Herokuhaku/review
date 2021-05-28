@@ -91,6 +91,9 @@ public:
 	// Drawの色を変える
 	void ChangeColor(void);
 
+	// スピードを上げる
+	void ChangeVec(float speed,Float2 max);
+
 private:
 	// 初期値設定
 	virtual void Init(void);
