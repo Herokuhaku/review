@@ -61,8 +61,7 @@ void Square::Update(float delta, ShapeVec& shapes, VecInt& vecint, ParamVec& pve
 		//©•ª‚Ìˆ—
 		smooth_ = std::make_pair(change_["MAG"].first,true);
 		//smooth_ = std::pair<double, bool>(change_["MAG"].first, true);
-		change_["MAG"].second = true;	
-		hitchecktmp.first->ChangeColor();
+		change_["MAG"].second = true;
 		// ©•ª‚¶‚á‚È‚©‚Á‚½‚çF‚ğ•Ï‚¦‚é
 		if (hitchecktmp.first->GetMynum() != mynumber_)
 		{

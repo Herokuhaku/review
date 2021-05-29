@@ -119,6 +119,7 @@ protected:
 	std::map<std::string, std::pair<double, bool>> change_;
 	std::pair<double, bool> smooth_;
 	int smoothsize_;
-	int maxmag_;
+	double maxmag_;
+	double minmag_;
 	double plusmag_;
 };

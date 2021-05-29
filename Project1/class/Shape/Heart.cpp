@@ -19,7 +19,9 @@ void Heart::Update(float delta, ShapeVec& shapes, VecInt& vecint, ParamVec& pvec
 	if (hitchecktmp.first != nullptr && hitchecktmp.second)
 	{
 		//é©ï™ÇÃèàóù
-
+		smooth_ = std::make_pair(change_["MAG"].first, true);
+		//smooth_ = std::pair<double, bool>(change_["MAG"].first, true);
+		change_["MAG"].second = true;
 
 		// ëäéËÇ÷ÇÃèàóù
 		if (hitchecktmp.first->GetType() == ShapeType::Circle)
@@ -28,6 +30,7 @@ void Heart::Update(float delta, ShapeVec& shapes, VecInt& vecint, ParamVec& pvec
 		}
 		//shapes.emplace_back(std::make_unique<Square>(Float2(475, 475), Float2(50, 50), Allhit_,*allnumber_++,*allnumber_));
 	}
+	Shape::ChangeDrawSize(-plusmag_);
 }
 
 void Heart::Draw(void)
@@ -79,4 +82,5 @@ void Heart::Init(void)
 	}
 	SetDrawScreen(DX_SCREEN_BACK);
 	point.clear();
+	smoothsize_ = 0.25;
 }

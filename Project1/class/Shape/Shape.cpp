@@ -131,8 +131,17 @@ std::pair<double, bool> Shape::GetChange(std::string str)
 
 void Shape::ChangeDrawSize(double plus)
 {
-	if (change_["MAG"].first < maxmag_ && (change_["MAG"].first - smooth_.first) <= smoothsize_) {
-		change_["MAG"].first += plus;
+	if (0 < plus) {
+		if (change_["MAG"].first < maxmag_ && (change_["MAG"].first - smooth_.first) <= smoothsize_)
+		{
+			change_["MAG"].first += plus;
+		}
+	}
+	else {
+		if (change_["MAG"].first > minmag_ && (change_["MAG"].first - smooth_.first) <= smoothsize_)
+		{
+			change_["MAG"].first += plus;
+		}
 	}
 }
 
@@ -171,6 +180,7 @@ void Shape::Init(void)
 	hitnow_ = true;
 	screenhit_ = false;
 	maxmag_ = 3.0f;
+	minmag_ = 0.5f;
 	plusmag_ = 0.005;
 
 	change_.try_emplace("ROTA",0.0f,false);

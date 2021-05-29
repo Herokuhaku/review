@@ -36,7 +36,6 @@ void Circle::Update(float delta, ShapeVec& shapes, VecInt& vecint, ParamVec& pve
 		}
 		//shapes.emplace_back(std::make_unique<Square>(Float2(475, 475), Float2(50, 50), Allhit_,*allnumber_++,*allnumber_));
 	}
-
 }
 
 void Circle::Draw(void)

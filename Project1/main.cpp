@@ -34,7 +34,7 @@ int WINAPI WinMain(_In_ HINSTANCE hInstance, _In_opt_  HINSTANCE hPrevInstance, 
 
 	// Shape
 	ShapeVec shapes;
-	shapes.emplace_back(std::make_shared<Square>(Parameters(Float2(375,375),Float2(100,50), Float2(50, 50)),shapeNum++));
+	//shapes.emplace_back(std::make_shared<Square>(Parameters(Float2(375,375),Float2(100,50), Float2(50, 50)),shapeNum++));
 	shapes.emplace_back(std::make_shared<Square>(Parameters(Float2(475,475),Float2(50,-100), Float2(50, 50)), shapeNum++));
 	shapes.emplace_back(std::make_shared<Circle>(Parameters(Float2(475, 475),Float2(-75,100),Float2(25,0)), shapeNum++));
 	shapes.emplace_back(std::make_shared<Triangle>(Parameters(Float2(500, 500), Float2(-120,75), Float2(30, 0)), shapeNum++));
