@@ -81,7 +81,7 @@ int WINAPI WinMain(_In_ HINSTANCE hInstance, _In_opt_  HINSTANCE hPrevInstance, 
 		// “–‚½‚è”»’è•`‰æ
 		for (auto& shape : shapes)
 		{
-			//shape->HitDraw();
+			shape->HitDraw();
 		}
 
 		// íœˆ—

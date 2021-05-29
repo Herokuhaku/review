@@ -57,9 +57,9 @@ void Heart::Draw(float num)
 	DrawRotaGraph(pos_.x, pos_.y, 1.0f * num, 0, heartsave_, true);
 	DrawCircle(pos_.x, pos_.y, 2, 0xff0000);
 	hit_.clear();
-	hit_.emplace_back(HitPair(Float2(pos_.x, pos_.y), size_.x));
-	hit_.emplace_back(HitPair(Float2(pos_.x - (size_.x / 1.3), pos_.y - size_.x / 1.3), size_.x / 1.5));
-	hit_.emplace_back(HitPair(Float2(pos_.x + (size_.x / 1.3), pos_.y - size_.x / 1.3), size_.x / 1.5));
+	hit_.emplace_back(HitPair(Float2(pos_.x, pos_.y), size_.x*num));
+	hit_.emplace_back(HitPair(Float2(pos_.x - ((size_.x * num) / 1.3), pos_.y - (size_.x * num) / 1.3), (size_.x * num) / 1.5));
+	hit_.emplace_back(HitPair(Float2(pos_.x + ((size_.x * num )/ 1.3), pos_.y - (size_.x * num)/ 1.3), (size_.x * num)/ 1.5));
 }
 
 void Heart::Init(void)
