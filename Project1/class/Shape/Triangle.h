@@ -1,5 +1,6 @@
 #pragma once
 #include <vector>
+#include <map>
 #include "Shape.h"
 class Triangle :
 	public Shape
@@ -21,5 +22,7 @@ private:
 	std::vector<Float2> point;
 	float height_;
 	double angle_;
+
+	std::map<ShapeType, int> hitcount_;
 };
 

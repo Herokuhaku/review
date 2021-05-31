@@ -34,9 +34,10 @@ int WINAPI WinMain(_In_ HINSTANCE hInstance, _In_opt_  HINSTANCE hPrevInstance, 
 
 	// Shape
 	ShapeVec shapes;
-	//shapes.emplace_back(std::make_shared<Square>(Parameters(Float2(375,375),Float2(100,50), Float2(50, 50)),shapeNum++));
+	shapes.emplace_back(std::make_shared<Square>(Parameters(Float2(375,375),Float2(100,50), Float2(50, 50)),shapeNum++));
 	shapes.emplace_back(std::make_shared<Square>(Parameters(Float2(475,475),Float2(50,-100), Float2(50, 50)), shapeNum++));
 	shapes.emplace_back(std::make_shared<Circle>(Parameters(Float2(475, 475),Float2(-75,100),Float2(25,0)), shapeNum++));
+	shapes.emplace_back(std::make_shared<Circle>(Parameters(Float2(105, 50), Float2(25, 70), Float2(25, 0)), shapeNum++));
 	shapes.emplace_back(std::make_shared<Triangle>(Parameters(Float2(500, 500), Float2(-120,75), Float2(30, 0)), shapeNum++));
 	shapes.emplace_back(std::make_shared<Triangle>(Parameters(Float2(300, 200), Float2(50, -75), Float2(30, 0)), shapeNum++));
 	shapes.emplace_back(std::make_shared<Triangle>(Parameters(Float2(200, 400), Float2(80, 25), Float2(30, 0)), shapeNum++));
@@ -44,6 +45,8 @@ int WINAPI WinMain(_In_ HINSTANCE hInstance, _In_opt_  HINSTANCE hPrevInstance, 
 	shapes.emplace_back(std::make_shared<Star>(Parameters(Float2(305, 55), Float2(87, -35), Float2(25, 0)), shapeNum++));
 	shapes.emplace_back(std::make_shared<Star>(Parameters(Float2(705, 305), Float2(-55,170), Float2(25, 0)), shapeNum++));
 	shapes.emplace_back(std::make_shared<Heart>(Parameters(Float2(475, 475), Float2(-100, 50), Float2(25, 0)), shapeNum++));
+	shapes.emplace_back(std::make_shared<Heart>(Parameters(Float2(275, 475), Float2(-20, 150), Float2(25, 0)), shapeNum++));
+	shapes.emplace_back(std::make_shared<Heart>(Parameters(Float2(475, 725), Float2(-50, 50), Float2(25, 0)), shapeNum++));
 
 	std::chrono::system_clock::time_point  start, end;
 	end = std::chrono::system_clock::now();
@@ -100,7 +103,28 @@ int WINAPI WinMain(_In_ HINSTANCE hInstance, _In_opt_  HINSTANCE hPrevInstance, 
 		 //’Ç‰Áˆ—
 		if (paramvec.size() >= 1) {
 			for (auto& param : paramvec) {
-				shapes.emplace_back(std::make_shared<Circle>(param,shapeNum++));
+				switch (param.t)
+				{
+				case ShapeType::NON:
+					break;
+				case ShapeType::Square:
+					shapes.emplace_back(std::make_shared<Square>(param,shapeNum++));
+					break;
+				case ShapeType::Star:
+					shapes.emplace_back(std::make_shared<Star>(param, shapeNum++));
+					break;
+				case ShapeType::Triangle:
+					shapes.emplace_back(std::make_shared<Triangle>(param, shapeNum++));
+					break;
+				case ShapeType::Circle:
+					shapes.emplace_back(std::make_shared<Circle>(param, shapeNum++));
+					break;
+				case ShapeType::Heart:
+					shapes.emplace_back(std::make_shared<Heart>(param, shapeNum++));
+					break;
+				default:
+					break;
+				}
 			}
 			paramvec.clear();
 		}

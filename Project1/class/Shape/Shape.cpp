@@ -173,6 +173,16 @@ int Shape::GetMynum(void)
 	return mynumber_;
 }
 
+Float2 Shape::GetSize(void)
+{
+	return size_;
+}
+
+bool Shape::GetHitNow(void)
+{
+	return hitnow_;
+}
+
 void Shape::Init(void)
 {
 	stype_ = ShapeType::NON;
@@ -180,7 +190,7 @@ void Shape::Init(void)
 	hitnow_ = true;
 	screenhit_ = false;
 	maxmag_ = 3.0f;
-	minmag_ = 0.5f;
+	minmag_ = 0.75f;
 	plusmag_ = 0.005;
 
 	change_.try_emplace("ROTA",0.0f,false);

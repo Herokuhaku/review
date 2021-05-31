@@ -24,7 +24,8 @@ void Heart::Update(float delta, ShapeVec& shapes, VecInt& vecint, ParamVec& pvec
 		change_["MAG"].second = true;
 
 		// ‘ŠŽè‚Ö‚Ìˆ—
-		if (hitchecktmp.first->GetType() == ShapeType::Circle)
+		if (hitchecktmp.first->GetType() == ShapeType::Circle &&
+			hitchecktmp.first->GetSize().x < size_.x/2)
 		{
 			vecint.emplace_back(hitchecktmp.first->GetMynum());
 		}

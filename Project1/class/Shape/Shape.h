@@ -36,6 +36,13 @@ struct Parameters {
 		Parameters::v = v;
 		Parameters::s = s;
 	};
+	Parameters(ShapeType type,Float2 p, Float2 v, Float2 s) {
+		Parameters::t = type;
+		Parameters::p = p;
+		Parameters::v = v;
+		Parameters::s = s;
+	};
+	ShapeType t = ShapeType::NON;
 	// pos
 	Float2 p;
 	// vec
@@ -71,7 +78,10 @@ public:
 	virtual HitPairVec GetHitPairVec(void);
 	// 自分の生成番号呼び出し
 	virtual int GetMynum(void);
-
+	// サイズ呼び出し
+	virtual Float2 GetSize(void);
+	// 現在の状態(当たり判定)呼び出し
+	virtual bool GetHitNow(void);
 	// 当たり判定
 	std::pair<SharedShape&,bool> HitCheck(ShapeVec shapes);
 	// 円の判定視覚化
@@ -93,7 +103,7 @@ public:
 
 	// スピードを上げる
 	void ChangeVec(float speed,Float2 max = { 300,300 },Float2 min = { 20,20 });
-
+	
 private:
 	// 初期値設定
 	virtual void Init(void);

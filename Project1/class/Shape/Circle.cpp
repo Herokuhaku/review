@@ -23,11 +23,10 @@ void Circle::Update(float delta, ShapeVec& shapes, VecInt& vecint, ParamVec& pve
 			Parameters tmpparam;
 			tmpparam.p = pos_;
 			tmpparam.s = size_ / 2;
-
-			pvec.emplace_back(Parameters(tmpparam.p, Float2(vec_.x, vec_.y), tmpparam.s));
-			pvec.emplace_back(Parameters(tmpparam.p, Float2(vec_.x, -vec_.y), tmpparam.s));
-			pvec.emplace_back(Parameters(tmpparam.p, Float2(-vec_.x, vec_.y), tmpparam.s));
-			pvec.emplace_back(Parameters(tmpparam.p, Float2(-vec_.x, -vec_.y), tmpparam.s));
+			pvec.emplace_back(Parameters(stype_,tmpparam.p, Float2(vec_.x, vec_.y), tmpparam.s));
+			pvec.emplace_back(Parameters(stype_,tmpparam.p, Float2(vec_.x, -vec_.y), tmpparam.s));
+			pvec.emplace_back(Parameters(stype_, tmpparam.p, Float2(-vec_.x, vec_.y), tmpparam.s));
+			pvec.emplace_back(Parameters(stype_, tmpparam.p, Float2(-vec_.x, -vec_.y), tmpparam.s));
 			vecint.emplace_back(mynumber_);
 		}
 		if (hitchecktmp.first->GetMynum() != mynumber_)

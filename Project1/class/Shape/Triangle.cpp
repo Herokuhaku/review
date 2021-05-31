@@ -20,7 +20,17 @@ void Triangle::Update(float delta, ShapeVec& shapes, VecInt& vecint, ParamVec& p
     if (hitchecktmp.first != nullptr && hitchecktmp.second)
     {
         //Ž©•ª‚Ìˆ—
-        
+        hitcount_[hitchecktmp.first->GetType()]++;
+        // 
+        if (hitcount_[hitchecktmp.first->GetType()] >= 3) {
+            Parameters tmpparam;
+            tmpparam.p = pos_;
+            tmpparam.s = { size_.x,size_.x};
+            tmpparam.v = vec_;
+            tmpparam.t = hitchecktmp.first->GetType();
+            pvec.emplace_back(Parameters(tmpparam));
+            vecint.emplace_back(mynumber_);
+        }
         if (hitchecktmp.first->GetMynum() != mynumber_)
         {
             hitchecktmp.first->ChangeVec(0.8, Float2(500, 500),Float2(0,0));
@@ -96,4 +106,10 @@ void Triangle::Init(void)
 {
     stype_ = ShapeType::Triangle;
     point.resize(3);
+    hitcount_.try_emplace(ShapeType::NON,0);
+    hitcount_.try_emplace(ShapeType::Square, 0);
+    hitcount_.try_emplace(ShapeType::Circle, 0);
+    hitcount_.try_emplace(ShapeType::Triangle, 0);
+    hitcount_.try_emplace(ShapeType::Star, 0);
+    hitcount_.try_emplace(ShapeType::Heart, 0);
 }
