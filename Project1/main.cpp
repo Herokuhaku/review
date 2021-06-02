@@ -56,6 +56,7 @@ int WINAPI WinMain(_In_ HINSTANCE hInstance, _In_opt_  HINSTANCE hPrevInstance, 
 	// 追加するshapeのパラメータリスト(vector)
 	ParamVec paramvec;
 
+	bool hitdrawcircle = false;
 	while (!ProcessMessage() && !CheckHitKey(KEY_INPUT_ESCAPE))
 	{
 		end = std::chrono::system_clock::now();
@@ -81,10 +82,12 @@ int WINAPI WinMain(_In_ HINSTANCE hInstance, _In_opt_  HINSTANCE hPrevInstance, 
 			shape->Update(del,shapes,eraseno,paramvec);
 		}
 
-		// 当たり判定描画
-		for (auto& shape : shapes)
-		{
-			shape->HitDraw();
+		if (hitdrawcircle) {
+			// 当たり判定描画
+			for (auto& shape : shapes)
+			{
+				shape->HitDraw();
+			}
 		}
 
 		// 削除処理
@@ -128,6 +131,13 @@ int WINAPI WinMain(_In_ HINSTANCE hInstance, _In_opt_  HINSTANCE hPrevInstance, 
 			}
 			paramvec.clear();
 		}
+		if (GetMouseInput() & MOUSE_INPUT_LEFT) {
+			hitdrawcircle = true;
+		}
+		else if (GetMouseInput() & MOUSE_INPUT_RIGHT) {
+			hitdrawcircle = false;
+		}
+
 		DrawLine(0-1,400-1,800-1,400-1,0xff0000);
 		DrawLine(400-1,0-1, 400-1, 800-1, 0xff0000);
 		
